@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using System.Web.Security;
 
 namespace DynamicsNAV365_Staff_WebPortal.Controllers
 {
-    public class AccountController : Controller
+	public class AccountController : Controller
     {
 		#region Signout
 		public ActionResult Logout()
 		{
-			return View();
+			FormsAuthentication.SignOut();
+			Session.Abandon();
+			return RedirectToAction("Index", "Home");
 		}
 		#endregion Signout
 	}
