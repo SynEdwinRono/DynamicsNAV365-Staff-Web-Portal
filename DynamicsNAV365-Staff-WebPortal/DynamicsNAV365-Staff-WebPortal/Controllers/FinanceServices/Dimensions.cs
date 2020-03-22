@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace DynamicsNAV365_Staff_WebPortal.Controllers.FinanceServices
+﻿namespace DynamicsNAV365_Staff_WebPortal.Controllers.FinanceServices
 {
 	public class Dimensions
 	{
