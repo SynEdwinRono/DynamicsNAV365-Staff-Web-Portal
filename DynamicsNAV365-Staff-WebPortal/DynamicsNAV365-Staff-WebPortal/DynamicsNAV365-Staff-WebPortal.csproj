@@ -149,10 +149,24 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FinanceServices\Dimensions.cs" />
+    <Compile Include="Controllers\FinanceServices\FinanceHomeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HumanResourceServices\HumanResourceHomeController.cs" />
+    <Compile Include="Controllers\PayrollServices\PayrollHomeController.cs" />
+    <Compile Include="Controllers\ProcurementServices\ProcurementHomeController.cs" />
+    <Compile Include="Controllers\ProcurementServices\PurchaseRequisitionController.cs" />
+    <Compile Include="Controllers\Responses\ErrorResponseController.cs" />
+    <Compile Include="Controllers\Responses\InfoResponseController.cs" />
+    <Compile Include="Controllers\Responses\SuccessResponseController.cs" />
+    <Compile Include="Controllers\StoresServices\StoresHomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Account\EmployeeProfileModel.cs" />
+    <Compile Include="Models\Account\LoginModel.cs" />
+    <Compile Include="Models\Account\PasswordResetModel.cs" />
+    <Compile Include="Models\Account\SendPasswordResetLinkModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -198,8 +212,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Account\" />
+    <Folder Include="Views\FinanceHome\" />
+    <Folder Include="Views\HumanResourceHome\" />
+    <Folder Include="Views\PayrollHome\" />
+    <Folder Include="Views\ProcurementHome\" />
+    <Folder Include="Views\PurchaseRequisition\" />
+    <Folder Include="Views\StoresHome\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
