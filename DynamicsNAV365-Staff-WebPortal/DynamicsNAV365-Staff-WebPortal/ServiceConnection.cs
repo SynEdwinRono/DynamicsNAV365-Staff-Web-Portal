@@ -5,11 +5,11 @@ namespace DynamicsNAV365_Staff_WebPortal
 {
 	public class ServiceConnection
 	{
-		public static string CompanyName = "ICDC";
-		public static string CompanySupportEmail = "customerservice@icdc.co.ke";
-
+		public static string CompanyName = "Regent Management Ltd";
+		public static string CompanySupportEmail = "info@regent-mgt.com";
 		public static string protocol = "http://";
 		public static string DynamicsNAVServer = "192.168.4.55";
+
 		static string SOAPPortNumber = "4042";
 		static string ODATAPortNumber = "4043";
 		static string DynamicsNAVServiceName = "ICDC_WS";
