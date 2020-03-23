@@ -19,7 +19,7 @@ namespace DynamicsNAV365_Staff_WebPortal.Models.Account
 
 		[Display(Name = "Gender")]
 		public string Gender { get; set; }
-
+       
 		[Display(Name = "Martial Status")]
 		public string MartialStatus { get; set; }
 
