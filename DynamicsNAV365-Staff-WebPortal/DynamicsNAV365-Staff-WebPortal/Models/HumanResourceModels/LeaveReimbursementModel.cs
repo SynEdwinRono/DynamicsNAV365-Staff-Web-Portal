@@ -10,6 +10,7 @@ namespace DynamicsNAV365_Staff_WebPortal.Models.HumanResourceModels
         [Display(Name = "No.")]
         public string No { get; set; }
 
+        [Display(Name = "Document Date.")]
         public string DocumentDate { get; set; }
 
         public string PostingDate { get; set; }
