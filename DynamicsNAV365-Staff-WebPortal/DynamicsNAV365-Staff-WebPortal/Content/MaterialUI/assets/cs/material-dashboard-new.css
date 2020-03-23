@@ -2511,8 +2511,7 @@ select.form-control[multiple],
 }
 
 .card [data-background-color="company_card"] {
-    background: linear-gradient(60deg, #ef5350, #e53935);
-    /*box-shadow: 0 12px 20px -10px #000000, 0 4px 20px 0px #000000, 0 7px 8px -5px #000000*/;
+    background: linear-gradient(60deg, #332e7e, #332e7e);
 }
 
 .card [data-background-color] {

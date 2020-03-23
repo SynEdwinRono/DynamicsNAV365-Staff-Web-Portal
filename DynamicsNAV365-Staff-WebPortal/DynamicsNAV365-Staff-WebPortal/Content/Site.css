@@ -1,24 +1,71 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿
+/*Sysre Site CSS*/
+body {
+    padding-top: 0px;
+    padding-bottom: 5px;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
-}
+th { font-size: 14px; }
+td { font-size: 14px; }
 
-/* Set width on the form input elements since they're 100% wide by default */
+/* Set width on the form input elements since they're 100% wide by default 
 input,
 select,
 textarea {
     max-width: 280px;
+}
+*/
+
+.showcss{ display:block;}
+.hidecss{ display:none;}
+
+/*Sysre Added*/
+.modal-header{
+    padding:5px;
+}
+
+.modal-footer{
+    padding:5px;
+}
+
+.skin-blue .modal-header{
+    background-color:#3c8dbc;
+}
+
+.skin-blue .modal-footer{
+    background-color:#3c8dbc;
+}
+
+.slim-btn{
+    padding: 5px;
+    margin: 0;
+}
+
+.table-hidden{
+    display: none;
+}
+
+.align-left{
+    float:left;
+}
+
+.align-right{
+    float:right;
+}
+
+.bootstrap-select .dropdown-toggle {
+    padding: 5px;
+    margin: 1px;
+    text-transform: none;
+}
+
+.select2-container {
+	border:0;
+    width:100% !important;
 }
