@@ -32,6 +32,7 @@ namespace DynamicsNAV365_Staff_WebPortal
 		//------------------------- share point configuration ----------------------------------------------
 
 		//http://41.78.24.34:9048/CPHD/OData/Company('CPHD')/PurchaseRequisitionLines
+		//http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/EmployeeAccountWebService
 
 
 		public static string GetDynamicsNAVSOAPURL(string ServiceName, string CompanyURLName)

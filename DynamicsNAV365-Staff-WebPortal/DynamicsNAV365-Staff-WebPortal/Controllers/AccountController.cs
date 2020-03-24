@@ -1,6 +1,10 @@
-﻿using DynamicsNAV365_Staff_WebPortal.Controllers.Responses;
+﻿using CaptchaMvc.HtmlHelpers;
+using DynamicsNAV365_Staff_WebPortal.Controllers.Responses;
+using DynamicsNAV365_Staff_WebPortal.DynamicsNAVODataServiceReference;
 using DynamicsNAV365_Staff_WebPortal.Models.Account;
 using System;
+using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -8,22 +12,31 @@ namespace DynamicsNAV365_Staff_WebPortal.Controllers
 {
 	public class AccountController : Controller
     {
-		static string companyName = ServiceConnection.CompanyName;
 		static string companyURL = "";
+		static string contactCustomerCareDesk = "Contact the " + ServiceConnection.CompanyName + " customer service help desk via:" + ServiceConnection.CompanySupportEmail + " for assistance.";
 
 		DynamicsNAVSOAPServices dynamicsNAVSOAPServices = new DynamicsNAVSOAPServices(companyURL);
 		DynamicsNAVODATAServices dynamicsNAVODataServices = new DynamicsNAVODATAServices(companyURL);
+
 		SuccessResponseController successResponse = new SuccessResponseController();
+		InfoResponseController infoResponse = new InfoResponseController();
 		ErrorResponseController errorResponse = new ErrorResponseController();
 
 		private string responseHeader = "";
 		private string responseMessage = "";
 		private string detailedResponseMessage = "";
-		private string returnControllerName = "";
-		private string returnActionName = "";
-		private string returnLinkName = "";
-		private bool hasParameters = false;
-		private string parameters = "";
+
+		private string button1ControllerName = "";
+		private string button1ActionName = "";
+		private bool button1HasParameters = false;
+		private string button1Parameters = "";
+		private string button1Name = "";
+
+		private string button2ControllerName = "";
+		private string button2ActionName = "";
+		private bool button2HasParameters = false;
+		private string button2Parameters = "";
+		private string button2Name = "";
 
 		public AccountController()
 		{
@@ -43,29 +56,30 @@ namespace DynamicsNAV365_Staff_WebPortal.Controllers
 			if (ModelState.IsValid)
 			{
 				loginModel.ErrorStatus = false;
+
 				try
 				{
-					string employeeNo = loginModel.EmployeeNo;
-					string employeePassword = Cryptography.Hash(loginModel.Password);
+					string customerNo = loginModel.CustomerNo;
+					string customerPassword = Cryptography.Hash(loginModel.Password);
 
-					//If employee does not exist
-					if (!CheckEmployeeExists(employeeNo))
+					//If customer does not exist
+					if (!dynamicsNAVSOAPServices.employeeAccountWS.EmployeeExists(customerNo))
 					{
 						loginModel.ErrorStatus = true;
-						loginModel.ErrorMessage = "The employee no. " + employeeNo + " was not found. Contact the " + companyName + " human resource division for assistance.";
+						loginModel.ErrorMessage = "The customer account no. " + customerNo + " was not found." + contactCustomerCareDesk;
 						return View(loginModel);
 					}
-					//If employee account is not active
-					if (!CheckEmployeeAccountIsActive(employeeNo))
+					//If customer account is not active
+					if (!dynamicsNAVSOAPServices.employeeAccountWS.EmployeeAccountIsActive(customerNo))
 					{
 						loginModel.ErrorStatus = true;
-						loginModel.ErrorMessage = "The employee no. " + employeeNo + " is inactive. Contact the " + companyName + " human resource division for account activation.";
+						loginModel.ErrorMessage = "The customer account no. " + customerNo + " is inactive." + contactCustomerCareDesk;
 						return View(loginModel);
 					}
-					if (LoginEmployee(employeeNo, employeePassword))  //Employee login successful
+					if (dynamicsNAVSOAPServices.employeeAccountWS.LoginEmployee(customerNo, customerPassword))  //Login Customer
 					{
 						int timeout = 30;
-						var ticket = new FormsAuthenticationTicket(employeeNo, false, timeout);
+						var ticket = new FormsAuthenticationTicket(customerNo, false, timeout);
 						string encryptedTicket = FormsAuthentication.Encrypt(ticket);
 						var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
 						cookie.Expires = DateTime.Now.AddMinutes(timeout);
@@ -81,10 +95,10 @@ namespace DynamicsNAV365_Staff_WebPortal.Controllers
 							return RedirectToAction("Index", "Home");
 						}
 					}
-					else //Employee login unsuccessful
+					else //Customer login unsuccessful
 					{
 						loginModel.ErrorStatus = true;
-						loginModel.ErrorMessage = "Invalid password provided";
+						loginModel.ErrorMessage = "Invalid password provided.";
 					}
 				}
 				catch (Exception ex)
@@ -101,96 +115,91 @@ namespace DynamicsNAV365_Staff_WebPortal.Controllers
 		{
 			return View();
 		}
-
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult SendPasswordResetLink(SendPasswordResetLinkModel passwordResetLinkModel)
+		public ActionResult SendPasswordResetLink(SendPasswordResetLinkModel passwordResetLinkObj)
 		{
-			/*Google reCaptcha
-            var response = Request["g-recaptcha-response"];
-            string secretKey = ServiceConnection.googleReCaptchaKey;
-
-            var client = new WebClient();
-            var result = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secretKey, response));
-            var obj = JObject.Parse(result);
-            bool status = (bool)obj.SelectToken("success");
-            if (!status)
-            {
-                ViewBag.CaptchaErrorMessage = "Please Verify that you are not a robot";
-                return View(passwordResetLinkModel);
-            }
-            //End Google reCaptcha*/
-			//Math or Char captha
+			//Math or Char capcha
 			if (!this.IsCaptchaValid("Invalid Answer"))
 			{
-				ViewBag.CaptchaErrorMessage = "Invalid Answer. Please Verify that you are not a robot";
-				return View(passwordResetLinkModel);
+				ViewBag.CaptchaErrorMessage = "Invalid Answer. Please Verify that you are not a robot.";
+				return View(passwordResetLinkObj);
 			}
-			//End Math or Char captha
+			//End Math or Char capcha
+
 			if (ModelState.IsValid)
 			{
 				try
 				{
-					string employeeNo = passwordResetLinkModel.EmployeeNo;
-					string employeeEmailAddress = GetEmployeeEmailAddress(employeeNo);
-					//If employee does not exist
-					if (!CheckEmployeeExists(employeeNo))
+					string customerNo = passwordResetLinkObj.CustomerNo;
+					string customerEmailAddress = dynamicsNAVSOAPServices.employeeAccountWS.GetEmployeeEmailAddress(customerNo);
+
+					//If customer does not exist
+					if (!dynamicsNAVSOAPServices.employeeAccountWS.EmployeeExists(customerNo))
 					{
-						passwordResetLinkModel.ErrorStatus = true;
-						passwordResetLinkModel.ErrorMessage = "The employee no. " + employeeNo + " was not found.";
-						return View(passwordResetLinkModel);
+						passwordResetLinkObj.ErrorStatus = true;
+						passwordResetLinkObj.ErrorMessage = "The customer account no. " + customerNo + " was not found. " + contactCustomerCareDesk;
+						return View(passwordResetLinkObj);
 					}
-					//If employee account is inactive
-					if (!CheckEmployeeAccountIsActive(employeeNo))
+					//If customer account is not active
+					if (!dynamicsNAVSOAPServices.employeeAccountWS.EmployeeAccountIsActive(customerNo))
 					{
-						passwordResetLinkModel.ErrorStatus = true;
-						passwordResetLinkModel.ErrorMessage = "The employee no. " + employeeNo + " is inactive. Contact the human resource division for account activation.";
-						return View(passwordResetLinkModel);
+						passwordResetLinkObj.ErrorStatus = true;
+						passwordResetLinkObj.ErrorMessage = "The customer account no. " + customerNo + " is inactive. " + contactCustomerCareDesk;
+						return View(passwordResetLinkObj);
 					}
 					//If the email address is empty
-					if (employeeEmailAddress.Equals(""))
+					if (customerEmailAddress.Equals(""))
 					{
-						passwordResetLinkModel.ErrorStatus = true;
-						passwordResetLinkModel.ErrorMessage = "The email address for the employee no. " + employeeNo + " is not setup. Contact the human resource division for email address update.";
-						return View(passwordResetLinkModel);
+						passwordResetLinkObj.ErrorStatus = true;
+						passwordResetLinkObj.ErrorMessage = "The email address for the customer account no. " + customerNo + " is empty. " + contactCustomerCareDesk;
+						return View(passwordResetLinkObj);
 					}
 					//Generate Password Reset Token
 					Random rnd = new Random();
 					int prefix = rnd.Next(10000, 1000000);
 					int surfix = rnd.Next(10000, 1000000);
-					string passwordResetToken = Cryptography.Hash(prefix.ToString() + employeeNo + surfix.ToString());
+					string passwordResetToken = Cryptography.Hash(prefix.ToString() + customerNo + surfix.ToString());
 
 					//Save the password reset token
-					SetEmployeePasswordResetToken(employeeNo, passwordResetToken);
+					dynamicsNAVSOAPServices.employeeAccountWS.SetPasswordResetToken(customerNo, passwordResetToken);
 
 					//Create Email Body
-					var callbackUrl = Url.Action("ResetEmployeePassword", "Account", new { employeeNo = employeeNo, passwordResetToken = passwordResetToken }, "http");
-					var linkHref = "<a href='" + callbackUrl + "' class='btn btn-primary'>Set your password</a>";
+					var callbackUrl = Url.Action("ResetEmployeePassword", "Account", new { CustomerNo = customerNo, PasswordResetToken = passwordResetToken }, "http");
+					var linkHref = "<a href='" + callbackUrl + "' class='btn btn-primary'><strong>Generate New Password</strong></a>";
 
-					string emailBody = "<p>You recently requested to reset your password for your " + companyName + " employee account no. " + employeeNo + ". Click the link below to reset it.</p>";
+					string emailBody = "<p>You recently requested to reset your password for your " + ServiceConnection.CompanyName + " staff account no. " + customerNo + ". Click the link below to reset it.</p>";
 					emailBody += "<p>" + linkHref + "</p>";
-					emailBody += "<p><b>Note that this link will expire after 24hrs</b></p>";
+					emailBody += "<p><b><i>Note that this link will expire after 24hrs</i></b></p>";
 					//End Create Email Body
 
-					if (SendPasswordResetLink(employeeNo, emailBody))
+					if (dynamicsNAVSOAPServices.employeeAccountWS.SendPasswordResetLink(customerNo, emailBody))
 					{
 						responseHeader = "Password Reset Link Sent";
-						responseMessage = "A password reset link has been sent to your registered employee email address (" + employeeEmailAddress + "). Note that the link will expire after 24hrs." +
-										  "If you did not get the email, contact the " + companyName + " ICT division for assistance.";
-						detailedResponseMessage = "";
-						returnControllerName = "Account";
-						returnActionName = "Logout";
-						returnLinkName = "Ok";
-						hasParameters = false;
-						parameters = "";
+						responseMessage = "A password reset link has been sent to your registered customer email address (" + customerEmailAddress + "). Note that the link will expire after 24hrs." +
+										  "If you did not get the email, " + contactCustomerCareDesk;
+						detailedResponseMessage = "A password reset link has been sent to your registered customer email address (" + customerEmailAddress + "). Note that the link will expire after 24hrs." +
+												  "If you did not get the email, " + contactCustomerCareDesk;
+						button1ControllerName = "Account";
+						button1ActionName = "Logout";
+						button1HasParameters = false;
+						button1Parameters = "";
+						button1Name = "Ok";
+
+						button2ControllerName = "";
+						button2ActionName = "";
+						button2HasParameters = false;
+						button2Parameters = "";
+						button2Name = "";
 						return successResponse.ApplicationSuccess(responseHeader, responseMessage, detailedResponseMessage,
-													returnControllerName, returnActionName, returnLinkName, hasParameters, parameters);
+																  button1ControllerName, button1ActionName, button1HasParameters, button1Parameters, button1Name,
+																  button2ControllerName, button2ActionName, button2HasParameters, button2Parameters, button2Name);
 					}
 					else
 					{
-						passwordResetLinkModel.ErrorStatus = true;
-						passwordResetLinkModel.ErrorMessage = "Unable to send the password reset link to email address(" + employeeEmailAddress + "). Contact the " + companyName + " ICT division for assistance.";
-						return View(passwordResetLinkModel);
+						passwordResetLinkObj.ErrorStatus = true;
+						passwordResetLinkObj.ErrorMessage = "Unable to send the password reset link to email address(" + customerEmailAddress + "). " + contactCustomerCareDesk;
+						return View(passwordResetLinkObj);
 					}
 				}
 				catch (Exception ex)
@@ -198,101 +207,148 @@ namespace DynamicsNAV365_Staff_WebPortal.Controllers
 					return errorResponse.ApplicationExceptionError(ex);
 				}
 			}
-			return View(passwordResetLinkModel);
+			return View(passwordResetLinkObj);
 		}
 
-		public ActionResult ResetEmployeePassword(string employeeNo, string passwordResetToken)
+		public ActionResult ResetEmployeePassword(string CustomerNo, string PasswordResetToken)
 		{
 			try
 			{
-				//If employee number is empty
-				if (employeeNo.Equals(""))
+				//If customer no. is empty
+				if (CustomerNo.Equals(""))
 				{
 					responseHeader = "Password Reset Error";
-					responseMessage = "Employee account no. was not provided";
-					detailedResponseMessage = "";
-					returnControllerName = "Account";
-					returnActionName = "Logout";
-					returnLinkName = "Ok";
-					hasParameters = false;
-					parameters = "";
+					responseMessage = "Customer no. was not provided.";
+					detailedResponseMessage = "Customer no. was not provided.";
+
+					button1ControllerName = "Account";
+					button1ActionName = "SendPasswordResetLink";
+					button1HasParameters = false;
+					button1Parameters = "";
+					button1Name = "Send New Password Reset Link";
+
+					button2ControllerName = "Account";
+					button2ActionName = "Logout";
+					button2HasParameters = false;
+					button2Parameters = "";
+					button2Name = "Cancel";
 					return errorResponse.ApplicationError(responseHeader, responseMessage, detailedResponseMessage,
-														  returnControllerName, returnActionName, returnLinkName, hasParameters, parameters);
+														  button1ControllerName, button1ActionName, button1HasParameters, button1Parameters, button1Name,
+														  button2ControllerName, button2ActionName, button2HasParameters, button2Parameters, button2Name);
 				}
 				//If password reset token is empty
-				if (passwordResetToken.Equals(""))
+				if (PasswordResetToken.Equals(""))
 				{
 					responseHeader = "Password Reset Error";
-					responseMessage = "The password reset security token was not provided";
-					detailedResponseMessage = "";
-					returnControllerName = "Account";
-					returnActionName = "Logout";
-					returnLinkName = "Ok";
-					hasParameters = false;
-					parameters = "";
+					responseMessage = "The password reset security token was not provided.";
+					detailedResponseMessage = "The password reset security token was not provided.";
+
+					button1ControllerName = "Account";
+					button1ActionName = "SendPasswordResetLink";
+					button1HasParameters = true;
+					button1Parameters = "?CustomerNo=" + CustomerNo;
+					button1Name = "Send New Password Reset Link";
+
+					button2ControllerName = "Account";
+					button2ActionName = "Logout";
+					button2HasParameters = false;
+					button2Parameters = "";
+					button2Name = "Cancel";
 					return errorResponse.ApplicationError(responseHeader, responseMessage, detailedResponseMessage,
-														  returnControllerName, returnActionName, returnLinkName, hasParameters, parameters);
+														  button1ControllerName, button1ActionName, button1HasParameters, button1Parameters, button1Name,
+														  button2ControllerName, button2ActionName, button2HasParameters, button2Parameters, button2Name);
 				}
-				//If employee no. does not exist
-				if (!CheckEmployeeExists(employeeNo))
+				//If customer does not exist
+				if (!dynamicsNAVSOAPServices.employeeAccountWS.EmployeeExists(CustomerNo))
 				{
 					responseHeader = "Password Reset Error";
-					responseMessage = "The employee no. " + employeeNo + " was not found. Contact the " + companyName + " human resource division for assistance.";
-					detailedResponseMessage = "";
-					returnControllerName = "Account";
-					returnActionName = "Logout";
-					returnLinkName = "Ok";
-					hasParameters = false;
-					parameters = "";
+					responseMessage = "The customer account no. " + CustomerNo + " was not found.";
+					detailedResponseMessage = "The customer account no. " + CustomerNo + " was not found.";
+
+					button1ControllerName = "Account";
+					button1ActionName = "SendPasswordResetLink";
+					button1HasParameters = true;
+					button1Parameters = "?CustomerNo=" + CustomerNo;
+					button1Name = "Send New Password Reset Link";
+
+					button2ControllerName = "Account";
+					button2ActionName = "Logout";
+					button2HasParameters = false;
+					button2Parameters = "";
+					button2Name = "Cancel";
 					return errorResponse.ApplicationError(responseHeader, responseMessage, detailedResponseMessage,
-														  returnControllerName, returnActionName, returnLinkName, hasParameters, parameters);
+														  button1ControllerName, button1ActionName, button1HasParameters, button1Parameters, button1Name,
+														  button2ControllerName, button2ActionName, button2HasParameters, button2Parameters, button2Name);
 				}
-				//If employee account is inactive
-				if (!CheckEmployeeAccountIsActive(employeeNo))
+				//If customer account is not active
+				if (!dynamicsNAVSOAPServices.employeeAccountWS.EmployeeAccountIsActive(CustomerNo))
 				{
 					responseHeader = "Password Reset Error";
-					responseMessage = "The employee no. " + employeeNo + " is inactive. Contact the " + companyName + " human resource division for account activation.";
-					detailedResponseMessage = "";
-					returnControllerName = "Account";
-					returnActionName = "Logout";
-					returnLinkName = "Ok";
-					hasParameters = false;
-					parameters = "";
+					responseMessage = "The customer account no. " + CustomerNo + " is inactive. " + contactCustomerCareDesk;
+					detailedResponseMessage = "The customer account no. " + CustomerNo + " is inactive. " + contactCustomerCareDesk;
+
+					button1ControllerName = "Account";
+					button1ActionName = "Logout";
+					button1HasParameters = false;
+					button1Parameters = "";
+					button1Name = "Ok";
+
+					button2ControllerName = "";
+					button2ActionName = "";
+					button2HasParameters = false;
+					button2Parameters = "";
+					button2Name = "";
 					return errorResponse.ApplicationError(responseHeader, responseMessage, detailedResponseMessage,
-														  returnControllerName, returnActionName, returnLinkName, hasParameters, parameters);
+														  button1ControllerName, button1ActionName, button1HasParameters, button1Parameters, button1Name,
+														  button2ControllerName, button2ActionName, button2HasParameters, button2Parameters, button2Name);
 				}
 				//If password reset security token is invalid
-				if (!GetEmployeePasswordResetToken(employeeNo).Equals(passwordResetToken))
+				if (!dynamicsNAVSOAPServices.employeeAccountWS.GetPasswordResetToken(CustomerNo).Equals(PasswordResetToken))
 				{
-					responseHeader = "Password Reset Failed";
-					responseMessage = "The provided password reset security token is invalid. Click ok to generate a new password reset link.";
-					detailedResponseMessage = "";
-					returnControllerName = "Account";
-					returnActionName = "SendPasswordResetLink";
-					returnLinkName = "Ok";
-					hasParameters = false;
-					parameters = "";
+					responseHeader = "Password Reset Error";
+					responseMessage = "The provided password reset security token is invalid.";
+					detailedResponseMessage = "The provided password reset security token is invalid.";
+
+					button1ControllerName = "Account";
+					button1ActionName = "SendPasswordResetLink";
+					button1HasParameters = true;
+					button1Parameters = "?CustomerNo=" + CustomerNo;
+					button1Name = "Send New Password Reset Link";
+
+					button2ControllerName = "Account";
+					button2ActionName = "Logout";
+					button2HasParameters = false;
+					button2Parameters = "";
+					button2Name = "Cancel";
 					return errorResponse.ApplicationError(responseHeader, responseMessage, detailedResponseMessage,
-														  returnControllerName, returnActionName, returnLinkName, hasParameters, parameters);
+														  button1ControllerName, button1ActionName, button1HasParameters, button1Parameters, button1Name,
+														  button2ControllerName, button2ActionName, button2HasParameters, button2Parameters, button2Name);
 				}
 				//If password reset security token is expired
-				if (CheckPasswordResetTokenExpired(employeeNo, passwordResetToken))
+				if (dynamicsNAVSOAPServices.employeeAccountWS.IsPasswordResetTokenExpired(CustomerNo, PasswordResetToken))
 				{
-					responseHeader = "Password Reset Failed";
-					responseMessage = "The provided password reset security token is expired. Click ok to generate a new password reset link.";
-					detailedResponseMessage = "";
-					returnControllerName = "Account";
-					returnActionName = "SendPasswordResetLink";
-					returnLinkName = "Ok";
-					hasParameters = false;
-					parameters = "";
-					return errorResponse.ApplicationError(responseHeader, responseMessage, detailedResponseMessage,
-														  returnControllerName, returnActionName, returnLinkName, hasParameters, parameters);
-				}
+					responseHeader = "Password Reset Error";
+					responseMessage = "The provided password reset security token is expired.";
+					detailedResponseMessage = "The provided password reset security token is expired.";
 
-				ResetPasswordModel passwordResetModel = new ResetPasswordModel();
-				passwordResetModel.EmployeeNo = employeeNo;
-				passwordResetModel.PasswordResetToken = passwordResetToken;
+					button1ControllerName = "Account";
+					button1ActionName = "SendPasswordResetLink";
+					button1HasParameters = true;
+					button1Parameters = "?CustomerNo=" + CustomerNo;
+					button1Name = "Send New Password Reset Link";
+
+					button2ControllerName = "Account";
+					button2ActionName = "Logout";
+					button2HasParameters = false;
+					button2Parameters = "";
+					button2Name = "Cancel";
+					return errorResponse.ApplicationError(responseHeader, responseMessage, detailedResponseMessage,
+														  button1ControllerName, button1ActionName, button1HasParameters, button1Parameters, button1Name,
+														  button2ControllerName, button2ActionName, button2HasParameters, button2Parameters, button2Name);
+				}
+				PasswordResetModel passwordResetModel = new PasswordResetModel();
+				passwordResetModel.CustomerNo = CustomerNo;
+				passwordResetModel.PasswordResetToken = PasswordResetToken;
 				return View(passwordResetModel);
 			}
 			catch (Exception ex)
@@ -303,29 +359,13 @@ namespace DynamicsNAV365_Staff_WebPortal.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult ResetEmployeePassword(ResetPasswordModel passwordResetModel)
+		public ActionResult ResetEmployeePassword(PasswordResetModel PasswordResetObj)
 		{
-			bool errorStatus = false;
-			string errorMessage = "";
-
-			/*Google reCaptcha
-            var response = Request["g-recaptcha-response"];
-            string secretKey = ServiceConnection.googleReCaptchaKey;
-            var client = new WebClient();
-            var result = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secretKey, response));
-            var obj = JObject.Parse(result);
-            bool status = (bool)obj.SelectToken("success");
-            if (!status)
-            {
-                ViewBag.CaptchaErrorMessage = "Please Verify that you are not a robot";
-                return View(passwordResetModel);
-            }
-            //End Google reCaptcha*/
 			//Math or Char captha
 			if (!this.IsCaptchaValid("Invalid Answer"))
 			{
 				ViewBag.CaptchaErrorMessage = "Invalid Answer. Please Verify that you are not a robot";
-				return View(passwordResetModel);
+				return View(PasswordResetObj);
 			}
 			//End Math or Char captha
 
@@ -334,63 +374,64 @@ namespace DynamicsNAV365_Staff_WebPortal.Controllers
 				try
 				{
 					//If password reset token is empty
-					if (passwordResetModel.PasswordResetToken.Equals(""))
+					if (PasswordResetObj.PasswordResetToken.Equals(""))
 					{
-						errorStatus = true;
-						errorMessage = "The password reset security token was not provided";
-						passwordResetModel.ErrorStatus = errorStatus;
-						passwordResetModel.ErrorMessage = errorMessage;
-						return View(passwordResetModel);
+						PasswordResetObj.ErrorStatus = true;
+						PasswordResetObj.ErrorMessage = "The password reset security token was not provided.";
+						return View(PasswordResetObj);
 					}
-					//If employee does not exist
-					if (!CheckEmployeeExists(passwordResetModel.EmployeeNo))
+
+					//If customer does not exist
+					if (!dynamicsNAVSOAPServices.employeeAccountWS.EmployeeExists(PasswordResetObj.CustomerNo))
 					{
-						errorStatus = true;
-						errorMessage = "The employee no. " + passwordResetModel.EmployeeNo + " was not found";
-						passwordResetModel.ErrorStatus = errorStatus;
-						passwordResetModel.ErrorMessage = errorMessage;
-						return View(passwordResetModel);
+						PasswordResetObj.ErrorStatus = true;
+						PasswordResetObj.ErrorMessage = "The customer account no. " + PasswordResetObj.CustomerNo + " was not found. " + contactCustomerCareDesk;
+						return View(PasswordResetObj);
 					}
-					//If employee account is inactive
-					if (!CheckEmployeeAccountIsActive(passwordResetModel.EmployeeNo))
+
+					//If customer account is not active
+					if (!dynamicsNAVSOAPServices.employeeAccountWS.EmployeeAccountIsActive(PasswordResetObj.CustomerNo))
 					{
-						errorStatus = true;
-						errorMessage = "The employee no. " + passwordResetModel.EmployeeNo + " is inactive. Contact the " + companyName + " human resource division for account activation.";
-						passwordResetModel.ErrorStatus = errorStatus;
-						passwordResetModel.ErrorMessage = errorMessage;
-						return View(passwordResetModel);
+						PasswordResetObj.ErrorStatus = true;
+						PasswordResetObj.ErrorMessage = "The customer account no. " + PasswordResetObj.CustomerNo + " is inactive. " + contactCustomerCareDesk;
+						return View(PasswordResetObj);
 					}
-					//If password reset security token is not valid
-					if (!GetEmployeePasswordResetToken(passwordResetModel.EmployeeNo).Equals(passwordResetModel.PasswordResetToken))
+
+					//If password reset security token is invalid
+					if (!dynamicsNAVSOAPServices.employeeAccountWS.GetPasswordResetToken(PasswordResetObj.CustomerNo).Equals(PasswordResetObj.PasswordResetToken))
 					{
-						errorStatus = true;
-						errorMessage = "The provided password reset security token is invalid.";
-						passwordResetModel.ErrorStatus = errorStatus;
-						passwordResetModel.ErrorMessage = errorMessage;
-						return View(passwordResetModel);
+						PasswordResetObj.ErrorStatus = true;
+						PasswordResetObj.ErrorMessage = "The provided password reset security token is invalid.";
+						return View(PasswordResetObj);
 					}
 					//If password reset security token is expired
-					if (CheckPasswordResetTokenExpired(passwordResetModel.EmployeeNo, passwordResetModel.PasswordResetToken))
+					if (dynamicsNAVSOAPServices.employeeAccountWS.IsPasswordResetTokenExpired(PasswordResetObj.CustomerNo, PasswordResetObj.PasswordResetToken))
 					{
-						errorStatus = true;
-						errorMessage = "The provided password reset security token is expired.";
-						passwordResetModel.ErrorStatus = errorStatus;
-						passwordResetModel.ErrorMessage = errorMessage;
-						return View(passwordResetModel);
+						PasswordResetObj.ErrorStatus = true;
+						PasswordResetObj.ErrorMessage = "The provided password reset security token is expired.";
+						return View(PasswordResetObj);
 					}
-					//Update the employee password
-					if (ResetEmployeePortalPassword(passwordResetModel.EmployeeNo, Cryptography.Hash(passwordResetModel.Password)))
+					//Update the customer password
+					if (dynamicsNAVSOAPServices.employeeAccountWS.ResetEmployeePortalPassword(PasswordResetObj.CustomerNo, Cryptography.Hash(PasswordResetObj.Password)))
 					{
 						responseHeader = "Password reset successful";
-						responseMessage = "The password for your employee no. " + passwordResetModel.EmployeeNo + " at " + companyName + " was successfully reset. Click ok to proceed to Login.";
-						detailedResponseMessage = "";
-						returnControllerName = "Account";
-						returnActionName = "Logout";
-						returnLinkName = "Ok";
-						hasParameters = false;
-						parameters = "";
+						responseMessage = "The password for your customer account no. " + PasswordResetObj.CustomerNo + " at " + ServiceConnection.CompanyName + " was successfully reset. Click ok to proceed to Login.";
+						detailedResponseMessage = "The password for your customer account no. " + PasswordResetObj.CustomerNo + " at " + ServiceConnection.CompanyName + " was successfully reset. Click ok to proceed to Login.";
+
+						button1ControllerName = "Account";
+						button1ActionName = "Logout";
+						button1HasParameters = false;
+						button1Parameters = "";
+						button1Name = "Ok";
+
+						button2ControllerName = "";
+						button2ActionName = "";
+						button2HasParameters = false;
+						button2Parameters = "";
+						button2Name = "";
 						return successResponse.ApplicationSuccess(responseHeader, responseMessage, detailedResponseMessage,
-													returnControllerName, returnActionName, returnLinkName, hasParameters, parameters);
+													button1ControllerName, button1ActionName, button1HasParameters, button1Parameters, button1Name,
+													button2ControllerName, button2ActionName, button2HasParameters, button2Parameters, button2Name);
 					}
 				}
 				catch (Exception ex)
@@ -398,7 +439,7 @@ namespace DynamicsNAV365_Staff_WebPortal.Controllers
 					return errorResponse.ApplicationExceptionError(ex);
 				}
 			}
-			return View(passwordResetModel);
+			return View(PasswordResetObj);
 		}
 
 		#endregion Password Reset
@@ -478,7 +519,6 @@ namespace DynamicsNAV365_Staff_WebPortal.Controllers
 		public ActionResult _EmployeeProfileSidebar()
 		{
 			EmployeeProfileModel employeeProfileModel = new EmployeeProfileModel();
-			employeeProfileModel.PassportAttached = false;
 			return PartialView(employeeProfileModel);
 		}
 
@@ -494,72 +534,19 @@ namespace DynamicsNAV365_Staff_WebPortal.Controllers
 		{
 			return System.Web.HttpContext.Current.User.Identity.Name;
 		}
-		public string GetEmployeeName(string EmployeeNo)
+		public static string GetCleanCustomerNo()
 		{
-			return dynamicsNAVSOAPServices.employeeAccountWS.GetEmployeeName(EmployeeNo);
+			return "";
 		}
-		public string GetCleanedEmployeeNo(string EmployeeNo)
-		{
-			return dynamicsNAVSOAPServices.employeeAccountWS.GetCleanedEmployeeNo(EmployeeNo);
-		}
-		public string GetEmployeeGender(string EmployeeNo)
-		{
-			return dynamicsNAVSOAPServices.employeeAccountWS.GetEmployeeGender(EmployeeNo);
-		}
-		public string GetEmployeeBirthDay(string EmployeeNo)
-		{
-			return dynamicsNAVSOAPServices.employeeAccountWS.GetEmployeeDateOfBirth(EmployeeNo);
-		}
-		public string GetEmployeeRetirementDate(string EmployeeNo)
-		{
-			return dynamicsNAVSOAPServices.employeeAccountWS.GetEmployeeRetirementDate(EmployeeNo);
-		}
-		public string GetEmployeeAge(string EmployeeNo)
-		{
-			return dynamicsNAVSOAPServices.employeeAccountWS.GetEmployeeAge(EmployeeNo);
-		}
-		private string GetEmployeeEmailAddress(string EmployeeNo)
-		{
-			return dynamicsNAVSOAPServices.employeeAccountWS.GetEmployeeEmailAddress(EmployeeNo);
-		}
-		private bool CheckEmployeeExists(string EmployeeNo)
-		{
-			return dynamicsNAVSOAPServices.employeeAccountWS.EmployeeExists(EmployeeNo);
-		}
-		private bool LoginEmployee(string EmployeeNo, string EmployeePassword)
-		{
-			return dynamicsNAVSOAPServices.employeeAccountWS.LoginEmployee(EmployeeNo, EmployeePassword);
-		}
-		private bool CheckEmployeeAccountIsActive(string EmployeeNo)
-		{
-			return dynamicsNAVSOAPServices.employeeAccountWS.EmployeeAccountIsActive(EmployeeNo);
-		}
-		private bool SetEmployeePasswordResetToken(string EmployeeNo, string PasswordResetToken)
-		{
-			return dynamicsNAVSOAPServices.employeeAccountWS.SetPasswordResetToken(EmployeeNo, PasswordResetToken);
-		}
-		private string GetEmployeePasswordResetToken(string EmployeeNo)
-		{
-			return dynamicsNAVSOAPServices.employeeAccountWS.GetPasswordResetToken(EmployeeNo);
-		}
-		private bool SendPasswordResetLink(string EmployeeNo, string EmailBody)
-		{
-			return dynamicsNAVSOAPServices.employeeAccountWS.SendPasswordResetLink(EmployeeNo, EmailBody);
-		}
-		private bool CheckPasswordResetTokenExpired(string EmployeeNo, string PasswordResetToken)
-		{
-			return dynamicsNAVSOAPServices.employeeAccountWS.IsPasswordResetTokenExpired(EmployeeNo, PasswordResetToken);
-		}
-		private bool ResetEmployeePortalPassword(string EmployeeNo, string NewPassword)
-		{
-			return dynamicsNAVSOAPServices.employeeAccountWS.ResetEmployeePortalPassword(EmployeeNo, NewPassword);
-		}
-		public string GetDynamicsNAVEmployeeDataDirectoryPath(string EmployeeNo)
+		[Authorize]
+		public string GetDynamicsNAVEmployeeDirectoryPath(string CustomerNo)
 		{
 			string parentDirectoryName = "Org_Data";
 			string childDirectoryName = "StaffData";
-			return ServiceConnection.protocol + ServiceConnection.DynamicsNAVServer + "/" + parentDirectoryName + "/" + childDirectoryName + "/" + EmployeeNo + "/";
+			CustomerNo = dynamicsNAVSOAPServices.employeeAccountWS.GetCleanedEmployeeNo(CustomerNo);
+			return ServiceConnection.protocol + ServiceConnection.DynamicsNAVServer + "/" + parentDirectoryName + "/" + childDirectoryName + "/" + CustomerNo + "/" + CustomerNo;
 		}
+
 		#endregion Helper Functions
 	}
 }

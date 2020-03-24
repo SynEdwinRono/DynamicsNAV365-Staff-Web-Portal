@@ -217,7 +217,17 @@
     <Compile Include="Models\Responses\InfoResponseModel.cs" />
     <Compile Include="Models\Responses\SuccessResponseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="ServiceConnection.cs" />
+    <Compile Include="Web References\EmployeeAccountWebServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Connected Services\DynamicsNAVODataServiceReference\Reference.datasvcmap">
@@ -640,6 +650,10 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Connected Services\DynamicsNAVODataServiceReference\service.edmx" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\HumanResourceServiceScripts\LeaveApplicationScripts\LeaveApplication.js" />
     <Content Include="Scripts\InventoryServiceScripts\StoreRequisitionScripts\StoreRequisition.js" />
@@ -685,11 +699,17 @@
     <Content Include="Views\Shared\ConfirmResponse.cshtml" />
     <Content Include="Views\Shared\ErrorResponse.cshtml" />
     <Content Include="Views\Shared\SuccessResponse.cshtml" />
+    <Content Include="Views\Account\EmployeeProfile.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <None Include="Web References\EmployeeAccountWebServiceReference\EmployeeAccountWebService.wsdl" />
+    <Content Include="Web References\EmployeeAccountWebServiceReference\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\AdminLTE\js\AdminLTE\" />
-    <Folder Include="Views\Account\" />
     <Folder Include="Views\FinanceHome\" />
     <Folder Include="Views\HumanResourceHome\" />
     <Folder Include="Views\InventoryHome\" />
@@ -709,6 +729,22 @@
     <ServiceReferenceMetadataStorage Include="Connected Services\DynamicsNAVODataServiceReference\">
       <Type>datasvcmap</Type>
     </ServiceReferenceMetadataStorage>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/EmployeeAccountWebService">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\EmployeeAccountWebServiceReference\</RelPath>
+      <UpdateFromURL>http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/EmployeeAccountWebService</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>DynamicsNAV365_Staff_WebPortal_EmployeeAccountWebServiceReference_EmployeeAccountWebService</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
