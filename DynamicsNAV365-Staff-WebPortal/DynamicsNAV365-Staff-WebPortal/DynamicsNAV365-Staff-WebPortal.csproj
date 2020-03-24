@@ -701,6 +701,8 @@
     <Content Include="Views\Shared\SuccessResponse.cshtml" />
     <Content Include="Views\Account\EmployeeProfile.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\ResetEmployeePassword.cshtml" />
+    <Content Include="Views\Account\SendPasswordResetLink.cshtml" />
     <None Include="Web References\EmployeeAccountWebServiceReference\EmployeeAccountWebService.wsdl" />
     <Content Include="Web References\EmployeeAccountWebServiceReference\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>

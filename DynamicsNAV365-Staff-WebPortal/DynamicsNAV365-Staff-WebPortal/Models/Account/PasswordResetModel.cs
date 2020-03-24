@@ -10,7 +10,7 @@ namespace DynamicsNAV365_Staff_WebPortal.Models.Account
 	{
 		[Display(Name = "Employee No.")]
 		[Required(AllowEmptyStrings = false, ErrorMessage = "Employee No. Required")]
-		public string CustomerNo { get; set; }
+		public string EmployeeNo { get; set; }
 
 		[Display(Name = "New Password")]
 		[Required(AllowEmptyStrings = false, ErrorMessage = "New Password Required")]
