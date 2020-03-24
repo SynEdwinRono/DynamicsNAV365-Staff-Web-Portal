@@ -8,15 +8,16 @@ namespace DynamicsNAV365_Staff_WebPortal
 		public static string CompanyName = "Regent Management Ltd";
 		public static string CompanySupportEmail = "info@regent-mgt.com";
 		public static string protocol = "http://";
-		public static string DynamicsNAVServer = "192.168.4.55";
+		public static string DynamicsNAVServer = "41.78.24.34"; //192.168.88.23 //MEDIQUIP@2019
+		public static string contactCustomerCareDesk = "Contact the " + CompanyName + " ICT Department for assistance.";
 
-		static string SOAPPortNumber = "4042";
-		static string ODATAPortNumber = "4043";
-		static string DynamicsNAVServiceName = "ICDC_WS";
-		static string DefaultCompanyURLName = "ICDC%20Test";
-		//static string DefaultCompanyURLName = "ICDC";
+		static string SOAPPortNumber = "9047";
+		static string ODATAPortNumber = "9048";
+		static string DynamicsNAVServiceName = "CPHD";
+		static string DefaultCompanyURLName = "CPHD";
+
 		static string ConnUsername = "WSAUTH";
-		static string ConnPassword = "Wsauth@2019";
+		static string ConnPassword = "Enterpr1$e";
 
 		//========================-Network Connection Credentials-------------------------------------------
 		static NetworkCredential netCred = new NetworkCredential(ConnUsername, ConnPassword);
@@ -29,6 +30,8 @@ namespace DynamicsNAV365_Staff_WebPortal
 		public static string SharePointUser = "NAVADMIN";
 		public static string SharePointUserPassword = "$ecurity123";
 		//------------------------- share point configuration ----------------------------------------------
+
+		//http://41.78.24.34:9048/CPHD/OData/Company('CPHD')/PurchaseRequisitionLines
 
 
 		public static string GetDynamicsNAVSOAPURL(string ServiceName, string CompanyURLName)
