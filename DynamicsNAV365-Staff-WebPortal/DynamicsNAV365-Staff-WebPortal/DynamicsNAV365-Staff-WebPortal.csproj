@@ -422,6 +422,7 @@
     <Content Include="Content\MaterialUI\assets\cs\bootstrap.min.css" />
     <Content Include="Content\MaterialUI\assets\cs\demo.css" />
     <Content Include="Content\MaterialUI\assets\cs\material-dashboard-new.css" />
+    <Content Include="Content\MaterialUI\assets\cs\material-dashboard.css" />
     <Content Include="Content\MaterialUI\assets\js\arrive.min.js" />
     <Content Include="Content\MaterialUI\assets\js\bootstrap-notify.js" />
     <Content Include="Content\MaterialUI\assets\js\bootstrap.min.js" />
