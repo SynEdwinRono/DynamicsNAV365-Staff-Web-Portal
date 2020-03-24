@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using DynamicsNAV365_Staff_WebPortal.DynamicsNAVODataServiceReference;
+using System;
 
 namespace DynamicsNAV365_Staff_WebPortal
 {
-    public class DynamicsNAVODATAServices
+	public class DynamicsNAVODATAServices
     {
 		public NAV dynamicsNAVOData = null;
 		public DynamicsNAVODATAServices(string companyURLName)
