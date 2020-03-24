@@ -33,5 +33,71 @@ namespace DynamicsNAV365_Staff_WebPortal.Properties {
                     "WebService"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/ProcurementManagementWS")]
+        public string DynamicsNAV365_Staff_WebPortal_ProcurementManagementWebServiceRef_ProcurementManagementWS {
+            get {
+                return ((string)(this["DynamicsNAV365_Staff_WebPortal_ProcurementManagementWebServiceRef_ProcurementMana" +
+                    "gementWS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/PortalApprovalManager")]
+        public string DynamicsNAV365_Staff_WebPortal_PortalApprovalManagerWebServiceRef_PortalApprovalManager {
+            get {
+                return ((string)(this["DynamicsNAV365_Staff_WebPortal_PortalApprovalManagerWebServiceRef_PortalApprovalM" +
+                    "anager"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/InventoryManagementWS")]
+        public string DynamicsNAV365_Staff_WebPortal_InventoryManagementWebServiceRef_InventoryManagementWS {
+            get {
+                return ((string)(this["DynamicsNAV365_Staff_WebPortal_InventoryManagementWebServiceRef_InventoryManageme" +
+                    "ntWS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/HumanResourceManagementWS")]
+        public string DynamicsNAV365_Staff_WebPortal_HumanResourceManagementWebServiceRef_HumanResourceManagementWS {
+            get {
+                return ((string)(this["DynamicsNAV365_Staff_WebPortal_HumanResourceManagementWebServiceRef_HumanResource" +
+                    "ManagementWS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/FundsManagementWebService")]
+        public string DynamicsNAV365_Staff_WebPortal_FundsManagementWebServiceReference_FundsManagementWebService {
+            get {
+                return ((string)(this["DynamicsNAV365_Staff_WebPortal_FundsManagementWebServiceReference_FundsManagement" +
+                    "WebService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/FundsClaimManagementWebService")]
+        public string DynamicsNAV365_Staff_WebPortal_FundsClaimManagementWebServiceReference_FundsClaimManagementWebService {
+            get {
+                return ((string)(this["DynamicsNAV365_Staff_WebPortal_FundsClaimManagementWebServiceReference_FundsClaim" +
+                    "ManagementWebService"]));
+            }
+        }
     }
 }

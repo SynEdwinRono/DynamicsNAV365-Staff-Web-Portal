@@ -5,5 +5,23 @@
     <Setting Name="DynamicsNAV365_Staff_WebPortal_EmployeeAccountWebServiceReference_EmployeeAccountWebService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/EmployeeAccountWebService</Value>
     </Setting>
+    <Setting Name="DynamicsNAV365_Staff_WebPortal_ProcurementManagementWebServiceRef_ProcurementManagementWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/ProcurementManagementWS</Value>
+    </Setting>
+    <Setting Name="DynamicsNAV365_Staff_WebPortal_PortalApprovalManagerWebServiceRef_PortalApprovalManager" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/PortalApprovalManager</Value>
+    </Setting>
+    <Setting Name="DynamicsNAV365_Staff_WebPortal_InventoryManagementWebServiceRef_InventoryManagementWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/InventoryManagementWS</Value>
+    </Setting>
+    <Setting Name="DynamicsNAV365_Staff_WebPortal_HumanResourceManagementWebServiceRef_HumanResourceManagementWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/HumanResourceManagementWS</Value>
+    </Setting>
+    <Setting Name="DynamicsNAV365_Staff_WebPortal_FundsManagementWebServiceReference_FundsManagementWebService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/FundsManagementWebService</Value>
+    </Setting>
+    <Setting Name="DynamicsNAV365_Staff_WebPortal_FundsClaimManagementWebServiceReference_FundsClaimManagementWebService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/FundsClaimManagementWebService</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

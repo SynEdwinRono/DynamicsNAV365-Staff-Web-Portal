@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/HumanResourceManagementWS" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/HumanResourceManagementWS" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/HumanResourceManagementWS" xmlns="http://www.w3.org/2001/XMLSchema">
+      <element name="CheckOpenLeavePlannerExists">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="employeeNoa46" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CheckOpenLeavePlannerExists_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CheckOpenLeaveApplicationExists">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="employeeNoa46" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CheckOpenLeaveApplicationExists_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CheckLeaveApplicationExists">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="leaveApplicationNoa46" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="employeeNoa46" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CheckLeaveApplicationExists_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CreateLeaveApplication">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="employeeNoa46" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CreateLeaveApplication_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ModifyLeaveApplication">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="leaveApplicationNoa46" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="leaveType" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="leaveStartDate" type="date" />
+            <element minOccurs="1" maxOccurs="1" name="daysApplied" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="reasonForLeave" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="substituteEmployeeNoa46" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ModifyLeaveApplication_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CheckRunningLeaves">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="employeeNoa46" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="startDate" type="date" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CheckRunningLeaves_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+      <element name="GetLeaveEndDate">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="employeeNoa46" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="leaveType" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="leaveStartDate" type="date" />
+            <element minOccurs="1" maxOccurs="1" name="daysApplied" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetLeaveEndDate_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="date" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetLeaveReturnDate">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="employeeNoa46" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="leaveType" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="leaveStartDate" type="date" />
+            <element minOccurs="1" maxOccurs="1" name="daysApplied" type="int" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetLeaveReturnDate_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="date" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetOpenLeaveApplication">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="employeeNoa46" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetOpenLeaveApplication_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetLeaveApplicationStatus">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="leaveApplicationNoa46" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetLeaveApplicationStatus_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CheckLeaveApplicationApprovalWorkflowEnabled">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="hRLeaveApplicationNoa46" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CheckLeaveApplicationApprovalWorkflowEnabled_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="SendLeaveApplicationApprovalRequest">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="hRLeaveApplicationNoa46" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="SendLeaveApplicationApprovalRequest_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CancelLeaveApplicationApprovalRequest">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="leaveApplicationNoa46" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CancelLeaveApplicationApprovalRequest_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ReopenLeaveApplication">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="leaveApplicationNoa46" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ReopenLeaveApplication_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetEmployeeLeaveBalance">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="employeeNo" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="leaveType" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetEmployeeLeaveBalance_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="decimal" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CheckOpenLeaveReimbursementExists">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="employeeNoa46" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CheckOpenLeaveReimbursementExists_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ModifyHRRequiredDocumentLocalURL">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="documentNoa46" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="documentCode" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="localURL" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="ModifyHRRequiredDocumentLocalURL_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="boolean" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CreatePortalDocumentLink">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="documentNoa46" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="CreatePortalDocumentLink_Result">
+        <complexType>
+          <sequence />
+        </complexType>
+      </element>
+    </schema>
+  </types>
+  <message name="CheckOpenLeavePlannerExists">
+    <part name="parameters" element="tns:CheckOpenLeavePlannerExists" />
+  </message>
+  <message name="CheckOpenLeavePlannerExists_Result">
+    <part name="parameters" element="tns:CheckOpenLeavePlannerExists_Result" />
+  </message>
+  <message name="CheckOpenLeaveApplicationExists">
+    <part name="parameters" element="tns:CheckOpenLeaveApplicationExists" />
+  </message>
+  <message name="CheckOpenLeaveApplicationExists_Result">
+    <part name="parameters" element="tns:CheckOpenLeaveApplicationExists_Result" />
+  </message>
+  <message name="CheckLeaveApplicationExists">
+    <part name="parameters" element="tns:CheckLeaveApplicationExists" />
+  </message>
+  <message name="CheckLeaveApplicationExists_Result">
+    <part name="parameters" element="tns:CheckLeaveApplicationExists_Result" />
+  </message>
+  <message name="CreateLeaveApplication">
+    <part name="parameters" element="tns:CreateLeaveApplication" />
+  </message>
+  <message name="CreateLeaveApplication_Result">
+    <part name="parameters" element="tns:CreateLeaveApplication_Result" />
+  </message>
+  <message name="ModifyLeaveApplication">
+    <part name="parameters" element="tns:ModifyLeaveApplication" />
+  </message>
+  <message name="ModifyLeaveApplication_Result">
+    <part name="parameters" element="tns:ModifyLeaveApplication_Result" />
+  </message>
+  <message name="CheckRunningLeaves">
+    <part name="parameters" element="tns:CheckRunningLeaves" />
+  </message>
+  <message name="CheckRunningLeaves_Result">
+    <part name="parameters" element="tns:CheckRunningLeaves_Result" />
+  </message>
+  <message name="GetLeaveEndDate">
+    <part name="parameters" element="tns:GetLeaveEndDate" />
+  </message>
+  <message name="GetLeaveEndDate_Result">
+    <part name="parameters" element="tns:GetLeaveEndDate_Result" />
+  </message>
+  <message name="GetLeaveReturnDate">
+    <part name="parameters" element="tns:GetLeaveReturnDate" />
+  </message>
+  <message name="GetLeaveReturnDate_Result">
+    <part name="parameters" element="tns:GetLeaveReturnDate_Result" />
+  </message>
+  <message name="GetOpenLeaveApplication">
+    <part name="parameters" element="tns:GetOpenLeaveApplication" />
+  </message>
+  <message name="GetOpenLeaveApplication_Result">
+    <part name="parameters" element="tns:GetOpenLeaveApplication_Result" />
+  </message>
+  <message name="GetLeaveApplicationStatus">
+    <part name="parameters" element="tns:GetLeaveApplicationStatus" />
+  </message>
+  <message name="GetLeaveApplicationStatus_Result">
+    <part name="parameters" element="tns:GetLeaveApplicationStatus_Result" />
+  </message>
+  <message name="CheckLeaveApplicationApprovalWorkflowEnabled">
+    <part name="parameters" element="tns:CheckLeaveApplicationApprovalWorkflowEnabled" />
+  </message>
+  <message name="CheckLeaveApplicationApprovalWorkflowEnabled_Result">
+    <part name="parameters" element="tns:CheckLeaveApplicationApprovalWorkflowEnabled_Result" />
+  </message>
+  <message name="SendLeaveApplicationApprovalRequest">
+    <part name="parameters" element="tns:SendLeaveApplicationApprovalRequest" />
+  </message>
+  <message name="SendLeaveApplicationApprovalRequest_Result">
+    <part name="parameters" element="tns:SendLeaveApplicationApprovalRequest_Result" />
+  </message>
+  <message name="CancelLeaveApplicationApprovalRequest">
+    <part name="parameters" element="tns:CancelLeaveApplicationApprovalRequest" />
+  </message>
+  <message name="CancelLeaveApplicationApprovalRequest_Result">
+    <part name="parameters" element="tns:CancelLeaveApplicationApprovalRequest_Result" />
+  </message>
+  <message name="ReopenLeaveApplication">
+    <part name="parameters" element="tns:ReopenLeaveApplication" />
+  </message>
+  <message name="ReopenLeaveApplication_Result">
+    <part name="parameters" element="tns:ReopenLeaveApplication_Result" />
+  </message>
+  <message name="GetEmployeeLeaveBalance">
+    <part name="parameters" element="tns:GetEmployeeLeaveBalance" />
+  </message>
+  <message name="GetEmployeeLeaveBalance_Result">
+    <part name="parameters" element="tns:GetEmployeeLeaveBalance_Result" />
+  </message>
+  <message name="CheckOpenLeaveReimbursementExists">
+    <part name="parameters" element="tns:CheckOpenLeaveReimbursementExists" />
+  </message>
+  <message name="CheckOpenLeaveReimbursementExists_Result">
+    <part name="parameters" element="tns:CheckOpenLeaveReimbursementExists_Result" />
+  </message>
+  <message name="ModifyHRRequiredDocumentLocalURL">
+    <part name="parameters" element="tns:ModifyHRRequiredDocumentLocalURL" />
+  </message>
+  <message name="ModifyHRRequiredDocumentLocalURL_Result">
+    <part name="parameters" element="tns:ModifyHRRequiredDocumentLocalURL_Result" />
+  </message>
+  <message name="CreatePortalDocumentLink">
+    <part name="parameters" element="tns:CreatePortalDocumentLink" />
+  </message>
+  <message name="CreatePortalDocumentLink_Result">
+    <part name="parameters" element="tns:CreatePortalDocumentLink_Result" />
+  </message>
+  <portType name="HumanResourceManagementWS_Port">
+    <operation name="CheckOpenLeavePlannerExists">
+      <input name="CheckOpenLeavePlannerExists" message="tns:CheckOpenLeavePlannerExists" />
+      <output name="CheckOpenLeavePlannerExists_Result" message="tns:CheckOpenLeavePlannerExists_Result" />
+    </operation>
+    <operation name="CheckOpenLeaveApplicationExists">
+      <input name="CheckOpenLeaveApplicationExists" message="tns:CheckOpenLeaveApplicationExists" />
+      <output name="CheckOpenLeaveApplicationExists_Result" message="tns:CheckOpenLeaveApplicationExists_Result" />
+    </operation>
+    <operation name="CheckLeaveApplicationExists">
+      <input name="CheckLeaveApplicationExists" message="tns:CheckLeaveApplicationExists" />
+      <output name="CheckLeaveApplicationExists_Result" message="tns:CheckLeaveApplicationExists_Result" />
+    </operation>
+    <operation name="CreateLeaveApplication">
+      <input name="CreateLeaveApplication" message="tns:CreateLeaveApplication" />
+      <output name="CreateLeaveApplication_Result" message="tns:CreateLeaveApplication_Result" />
+    </operation>
+    <operation name="ModifyLeaveApplication">
+      <input name="ModifyLeaveApplication" message="tns:ModifyLeaveApplication" />
+      <output name="ModifyLeaveApplication_Result" message="tns:ModifyLeaveApplication_Result" />
+    </operation>
+    <operation name="CheckRunningLeaves">
+      <input name="CheckRunningLeaves" message="tns:CheckRunningLeaves" />
+      <output name="CheckRunningLeaves_Result" message="tns:CheckRunningLeaves_Result" />
+    </operation>
+    <operation name="GetLeaveEndDate">
+      <input name="GetLeaveEndDate" message="tns:GetLeaveEndDate" />
+      <output name="GetLeaveEndDate_Result" message="tns:GetLeaveEndDate_Result" />
+    </operation>
+    <operation name="GetLeaveReturnDate">
+      <input name="GetLeaveReturnDate" message="tns:GetLeaveReturnDate" />
+      <output name="GetLeaveReturnDate_Result" message="tns:GetLeaveReturnDate_Result" />
+    </operation>
+    <operation name="GetOpenLeaveApplication">
+      <input name="GetOpenLeaveApplication" message="tns:GetOpenLeaveApplication" />
+      <output name="GetOpenLeaveApplication_Result" message="tns:GetOpenLeaveApplication_Result" />
+    </operation>
+    <operation name="GetLeaveApplicationStatus">
+      <input name="GetLeaveApplicationStatus" message="tns:GetLeaveApplicationStatus" />
+      <output name="GetLeaveApplicationStatus_Result" message="tns:GetLeaveApplicationStatus_Result" />
+    </operation>
+    <operation name="CheckLeaveApplicationApprovalWorkflowEnabled">
+      <input name="CheckLeaveApplicationApprovalWorkflowEnabled" message="tns:CheckLeaveApplicationApprovalWorkflowEnabled" />
+      <output name="CheckLeaveApplicationApprovalWorkflowEnabled_Result" message="tns:CheckLeaveApplicationApprovalWorkflowEnabled_Result" />
+    </operation>
+    <operation name="SendLeaveApplicationApprovalRequest">
+      <input name="SendLeaveApplicationApprovalRequest" message="tns:SendLeaveApplicationApprovalRequest" />
+      <output name="SendLeaveApplicationApprovalRequest_Result" message="tns:SendLeaveApplicationApprovalRequest_Result" />
+    </operation>
+    <operation name="CancelLeaveApplicationApprovalRequest">
+      <input name="CancelLeaveApplicationApprovalRequest" message="tns:CancelLeaveApplicationApprovalRequest" />
+      <output name="CancelLeaveApplicationApprovalRequest_Result" message="tns:CancelLeaveApplicationApprovalRequest_Result" />
+    </operation>
+    <operation name="ReopenLeaveApplication">
+      <input name="ReopenLeaveApplication" message="tns:ReopenLeaveApplication" />
+      <output name="ReopenLeaveApplication_Result" message="tns:ReopenLeaveApplication_Result" />
+    </operation>
+    <operation name="GetEmployeeLeaveBalance">
+      <input name="GetEmployeeLeaveBalance" message="tns:GetEmployeeLeaveBalance" />
+      <output name="GetEmployeeLeaveBalance_Result" message="tns:GetEmployeeLeaveBalance_Result" />
+    </operation>
+    <operation name="CheckOpenLeaveReimbursementExists">
+      <input name="CheckOpenLeaveReimbursementExists" message="tns:CheckOpenLeaveReimbursementExists" />
+      <output name="CheckOpenLeaveReimbursementExists_Result" message="tns:CheckOpenLeaveReimbursementExists_Result" />
+    </operation>
+    <operation name="ModifyHRRequiredDocumentLocalURL">
+      <input name="ModifyHRRequiredDocumentLocalURL" message="tns:ModifyHRRequiredDocumentLocalURL" />
+      <output name="ModifyHRRequiredDocumentLocalURL_Result" message="tns:ModifyHRRequiredDocumentLocalURL_Result" />
+    </operation>
+    <operation name="CreatePortalDocumentLink">
+      <input name="CreatePortalDocumentLink" message="tns:CreatePortalDocumentLink" />
+      <output name="CreatePortalDocumentLink_Result" message="tns:CreatePortalDocumentLink_Result" />
+    </operation>
+  </portType>
+  <binding name="HumanResourceManagementWS_Binding" type="tns:HumanResourceManagementWS_Port">
+    <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="CheckOpenLeavePlannerExists">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/HumanResourceManagementWS:CheckOpenLeavePlannerExists" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="CheckOpenLeavePlannerExists">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="CheckOpenLeavePlannerExists_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="CheckOpenLeaveApplicationExists">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/HumanResourceManagementWS:CheckOpenLeaveApplicationExists" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="CheckOpenLeaveApplicationExists">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="CheckOpenLeaveApplicationExists_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="CheckLeaveApplicationExists">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/HumanResourceManagementWS:CheckLeaveApplicationExists" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="CheckLeaveApplicationExists">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="CheckLeaveApplicationExists_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="CreateLeaveApplication">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/HumanResourceManagementWS:CreateLeaveApplication" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="CreateLeaveApplication">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="CreateLeaveApplication_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ModifyLeaveApplication">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/HumanResourceManagementWS:ModifyLeaveApplication" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ModifyLeaveApplication">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ModifyLeaveApplication_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="CheckRunningLeaves">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/HumanResourceManagementWS:CheckRunningLeaves" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="CheckRunningLeaves">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="CheckRunningLeaves_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetLeaveEndDate">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/HumanResourceManagementWS:GetLeaveEndDate" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetLeaveEndDate">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetLeaveEndDate_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetLeaveReturnDate">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/HumanResourceManagementWS:GetLeaveReturnDate" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetLeaveReturnDate">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetLeaveReturnDate_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetOpenLeaveApplication">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/HumanResourceManagementWS:GetOpenLeaveApplication" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetOpenLeaveApplication">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetOpenLeaveApplication_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetLeaveApplicationStatus">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/HumanResourceManagementWS:GetLeaveApplicationStatus" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetLeaveApplicationStatus">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetLeaveApplicationStatus_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="CheckLeaveApplicationApprovalWorkflowEnabled">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/HumanResourceManagementWS:CheckLeaveApplicationApprovalWorkflowEnabled" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="CheckLeaveApplicationApprovalWorkflowEnabled">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="CheckLeaveApplicationApprovalWorkflowEnabled_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="SendLeaveApplicationApprovalRequest">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/HumanResourceManagementWS:SendLeaveApplicationApprovalRequest" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="SendLeaveApplicationApprovalRequest">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="SendLeaveApplicationApprovalRequest_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="CancelLeaveApplicationApprovalRequest">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/HumanResourceManagementWS:CancelLeaveApplicationApprovalRequest" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="CancelLeaveApplicationApprovalRequest">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="CancelLeaveApplicationApprovalRequest_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ReopenLeaveApplication">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/HumanResourceManagementWS:ReopenLeaveApplication" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ReopenLeaveApplication">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ReopenLeaveApplication_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetEmployeeLeaveBalance">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/HumanResourceManagementWS:GetEmployeeLeaveBalance" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetEmployeeLeaveBalance">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetEmployeeLeaveBalance_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="CheckOpenLeaveReimbursementExists">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/HumanResourceManagementWS:CheckOpenLeaveReimbursementExists" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="CheckOpenLeaveReimbursementExists">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="CheckOpenLeaveReimbursementExists_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="ModifyHRRequiredDocumentLocalURL">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/HumanResourceManagementWS:ModifyHRRequiredDocumentLocalURL" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="ModifyHRRequiredDocumentLocalURL">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="ModifyHRRequiredDocumentLocalURL_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="CreatePortalDocumentLink">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/HumanResourceManagementWS:CreatePortalDocumentLink" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="CreatePortalDocumentLink">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="CreatePortalDocumentLink_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="HumanResourceManagementWS">
+    <port name="HumanResourceManagementWS_Port" binding="tns:HumanResourceManagementWS_Binding">
+      <address location="http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/HumanResourceManagementWS" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>

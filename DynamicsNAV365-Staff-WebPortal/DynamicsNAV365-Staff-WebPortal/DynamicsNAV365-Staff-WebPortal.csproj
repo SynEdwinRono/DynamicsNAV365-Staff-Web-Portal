@@ -179,6 +179,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FinanceServices\Dimensions.cs" />
     <Compile Include="Controllers\FinanceServices\FinanceHomeController.cs" />
+    <Compile Include="Controllers\FinanceServices\PettyCashController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HumanResourceServices\HumanResourceHomeController.cs" />
     <Compile Include="Controllers\InventoryServices\InventoryHomeController.cs" />
@@ -200,12 +201,17 @@
     <Compile Include="Models\Account\LoginModel.cs" />
     <Compile Include="Models\Account\PasswordResetModel.cs" />
     <Compile Include="Models\Account\SendPasswordResetLinkModel.cs" />
+    <Compile Include="Models\FinanceModels\FinanceHomeModels\Currency.cs" />
+    <Compile Include="Models\FinanceModels\FinanceHomeModels\DimensionValueModel.cs" />
+    <Compile Include="Models\FinanceModels\FinanceHomeModels\EmployeeBalancesModel.cs" />
     <Compile Include="Models\FinanceModels\FundsClaimModels\FundsClaimLineModel.cs" />
     <Compile Include="Models\FinanceModels\FundsClaimModels\FundsClaimModel.cs" />
     <Compile Include="Models\FinanceModels\ImprestModels\ImprestHeaderModel.cs" />
     <Compile Include="Models\FinanceModels\ImprestModels\ImprestLineModel.cs" />
     <Compile Include="Models\FinanceModels\ImprestSurrenderModels\ImprestSurrenderHeaderModel.cs" />
     <Compile Include="Models\FinanceModels\ImprestSurrenderModels\ImprestSurrenderLineModel.cs" />
+    <Compile Include="Models\FinanceModels\PettyCashModels\PettyCashHeaderModel.cs" />
+    <Compile Include="Models\FinanceModels\PettyCashModels\PettyCashLineModel.cs" />
     <Compile Include="Models\HumanResourceModels\EmployeeLeaveBalanceModel.cs" />
     <Compile Include="Models\HumanResourceModels\LeaveApplicationModel.cs" />
     <Compile Include="Models\HumanResourceModels\LeaveReimbursementModel.cs" />
@@ -228,22 +234,56 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\FundsClaimManagementWebServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\FundsManagementWebServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\HumanResourceManagementWebServiceRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\InventoryManagementWebServiceRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PortalApprovalManagerWebServiceRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ProcurementManagementWebServiceRef\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Connected Services\DynamicsNAVODataServiceReference\Reference.datasvcmap">
+    <None Include="Connected Services\DynamicsNAVODataServiceReference\Reference.datasvcmap">
       <Generator>DataServicesCoreClientGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
+    </None>
     <Content Include="Content\AdminLTE\css\AdminLTE.css" />
     <Content Include="Content\AdminLTE\css\bootstrap-wysihtml5\bootstrap3-wysihtml5.css" />
     <Content Include="Content\AdminLTE\css\bootstrap-wysihtml5\bootstrap3-wysihtml5.min.css" />
     <Content Include="Content\AdminLTE\css\ionicons.css" />
     <Content Include="Content\AdminLTE\css\ionicons.min.css" />
     <Content Include="Content\AdminLTE\font\ionicons.svg" />
+    <Content Include="Content\AdminLTE\js\AdminLTE\app.js" />
+    <Content Include="Content\AdminLTE\js\AdminLTE\dashboard.js" />
     <Content Include="Content\AdminLTE\js\plugins\bootstrap-wysihtml5\bootstrap3-wysihtml5.all.min.js" />
     <Content Include="Content\AdminLTE\js\plugins\bootstrap-wysihtml5\bootstrap3-wysihtml5.js" />
     <Content Include="Content\AdminLTE\js\plugins\iCheck\icheck.js" />
     <Content Include="Content\AdminLTE\js\plugins\iCheck\icheck.min.js" />
+    <Content Include="Content\bootstrap-select.css" />
+    <Content Include="Content\bootstrap-select.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -419,10 +459,10 @@
     <Content Include="Content\ladda-themeless.min.css" />
     <Content Include="Content\ladda.css" />
     <Content Include="Content\ladda.min.css" />
-    <Content Include="Content\MaterialUI\assets\cs\bootstrap.min.css" />
-    <Content Include="Content\MaterialUI\assets\cs\demo.css" />
-    <Content Include="Content\MaterialUI\assets\cs\material-dashboard-new.css" />
-    <Content Include="Content\MaterialUI\assets\cs\material-dashboard.css" />
+    <Content Include="Content\MaterialUI\assets\css\bootstrap.min.css" />
+    <Content Include="Content\MaterialUI\assets\css\demo.css" />
+    <Content Include="Content\MaterialUI\assets\css\material-dashboard-new.css" />
+    <Content Include="Content\MaterialUI\assets\css\material-dashboard.css" />
     <Content Include="Content\MaterialUI\assets\js\arrive.min.js" />
     <Content Include="Content\MaterialUI\assets\js\bootstrap-notify.js" />
     <Content Include="Content\MaterialUI\assets\js\bootstrap.min.js" />
@@ -486,6 +526,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\bootstrap-select.js" />
+    <Content Include="Scripts\bootstrap-select.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
@@ -571,41 +613,6 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\material-dashboard.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_alerts.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_buttons.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_cards.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_chartist.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_checkboxes.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_colors.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_dialogs.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_dropdown.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_footers.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_forms.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_inputs-size.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_inputs.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_misc.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_mixins.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_navbars.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_pagination.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_pills.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_popups.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_radios.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_responsive.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_ripples.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_shadows.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_sidebar-and-main-panel.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_tables.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_tabs.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_togglebutton.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_typography.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\_variables.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\mixins\_chartist.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\mixins\_transparency.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\mixins\_vendor-prefixes.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\plugins\_animate.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\plugins\_perfect-scrollbar.scss" />
-    <Content Include="Content\MaterialUI\assets\sass\md\plugins\_plugin-nouislider.scss" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\fontawesome-webfont.woff" />
@@ -642,6 +649,79 @@
     <Content Include="Content\AdminLTE\less\small-box.less" />
     <Content Include="Content\AdminLTE\less\timeline.less" />
     <Content Include="Content\AdminLTE\less\vars.less" />
+    <None Include="Connected Services\DynamicsNAVODataServiceReference\service.edmx" />
+    <Content Include="Content\bootstrap\wells.less" />
+    <Content Include="Content\bootstrap\variables.less" />
+    <Content Include="Content\bootstrap\utilities.less" />
+    <Content Include="Content\bootstrap\type.less" />
+    <Content Include="Content\bootstrap\tooltip.less" />
+    <Content Include="Content\bootstrap\thumbnails.less" />
+    <Content Include="Content\bootstrap\theme.less" />
+    <Content Include="Content\bootstrap\tables.less" />
+    <Content Include="Content\bootstrap\scaffolding.less" />
+    <Content Include="Content\bootstrap\responsive-utilities.less" />
+    <Content Include="Content\bootstrap\responsive-embed.less" />
+    <Content Include="Content\bootstrap\progress-bars.less" />
+    <Content Include="Content\bootstrap\print.less" />
+    <Content Include="Content\bootstrap\popovers.less" />
+    <Content Include="Content\bootstrap\panels.less" />
+    <Content Include="Content\bootstrap\pagination.less" />
+    <Content Include="Content\bootstrap\pager.less" />
+    <Content Include="Content\bootstrap\normalize.less" />
+    <Content Include="Content\bootstrap\navs.less" />
+    <Content Include="Content\bootstrap\navbar.less" />
+    <Content Include="Content\bootstrap\modals.less" />
+    <Content Include="Content\bootstrap\mixins\vendor-prefixes.less" />
+    <Content Include="Content\bootstrap\mixins\text-overflow.less" />
+    <Content Include="Content\bootstrap\mixins\text-emphasis.less" />
+    <Content Include="Content\bootstrap\mixins\table-row.less" />
+    <Content Include="Content\bootstrap\mixins\tab-focus.less" />
+    <Content Include="Content\bootstrap\mixins\size.less" />
+    <Content Include="Content\bootstrap\mixins\responsive-visibility.less" />
+    <Content Include="Content\bootstrap\mixins\resize.less" />
+    <Content Include="Content\bootstrap\mixins\reset-text.less" />
+    <Content Include="Content\bootstrap\mixins\reset-filter.less" />
+    <Content Include="Content\bootstrap\mixins\progress-bar.less" />
+    <Content Include="Content\bootstrap\mixins\panels.less" />
+    <Content Include="Content\bootstrap\mixins\pagination.less" />
+    <Content Include="Content\bootstrap\mixins\opacity.less" />
+    <Content Include="Content\bootstrap\mixins\nav-vertical-align.less" />
+    <Content Include="Content\bootstrap\mixins\nav-divider.less" />
+    <Content Include="Content\bootstrap\mixins\list-group.less" />
+    <Content Include="Content\bootstrap\mixins\labels.less" />
+    <Content Include="Content\bootstrap\mixins\image.less" />
+    <Content Include="Content\bootstrap\mixins\hide-text.less" />
+    <Content Include="Content\bootstrap\mixins\grid.less" />
+    <Content Include="Content\bootstrap\mixins\grid-framework.less" />
+    <Content Include="Content\bootstrap\mixins\gradients.less" />
+    <Content Include="Content\bootstrap\mixins\forms.less" />
+    <Content Include="Content\bootstrap\mixins\clearfix.less" />
+    <Content Include="Content\bootstrap\mixins\center-block.less" />
+    <Content Include="Content\bootstrap\mixins\buttons.less" />
+    <Content Include="Content\bootstrap\mixins\border-radius.less" />
+    <Content Include="Content\bootstrap\mixins\background-variant.less" />
+    <Content Include="Content\bootstrap\mixins\alerts.less" />
+    <Content Include="Content\bootstrap\mixins.less" />
+    <Content Include="Content\bootstrap\media.less" />
+    <Content Include="Content\bootstrap\list-group.less" />
+    <Content Include="Content\bootstrap\labels.less" />
+    <Content Include="Content\bootstrap\jumbotron.less" />
+    <Content Include="Content\bootstrap\input-groups.less" />
+    <Content Include="Content\bootstrap\grid.less" />
+    <Content Include="Content\bootstrap\glyphicons.less" />
+    <Content Include="Content\bootstrap\forms.less" />
+    <Content Include="Content\bootstrap\dropdowns.less" />
+    <Content Include="Content\bootstrap\component-animations.less" />
+    <Content Include="Content\bootstrap\code.less" />
+    <Content Include="Content\bootstrap\close.less" />
+    <Content Include="Content\bootstrap\carousel.less" />
+    <Content Include="Content\bootstrap\buttons.less" />
+    <Content Include="Content\bootstrap\button-groups.less" />
+    <Content Include="Content\bootstrap\breadcrumbs.less" />
+    <Content Include="Content\bootstrap\bootstrap.less" />
+    <Content Include="Content\bootstrap\badges.less" />
+    <Content Include="Content\bootstrap\alerts.less" />
+    <Content Include="Content\bootstrap-select.css.map" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -650,13 +730,162 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Connected Services\DynamicsNAVODataServiceReference\service.edmx" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_alerts.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_buttons.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_cards.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_chartist.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_checkboxes.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_colors.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_dialogs.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_dropdown.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_footers.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_forms.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_inputs-size.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_inputs.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_misc.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_mixins.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_navbars.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_pagination.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_pills.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_popups.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_radios.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_responsive.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_ripples.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_shadows.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_sidebar-and-main-panel.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_tables.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_tabs.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_togglebutton.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_typography.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\_variables.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\mixins\_chartist.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\mixins\_transparency.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\mixins\_vendor-prefixes.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\plugins\_animate.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\plugins\_perfect-scrollbar.scss" />
+    <Content Include="Content\MaterialUI\assets\sass\md\plugins\_plugin-nouislider.scss" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Scripts\i18n\defaults-am_ET.js" />
+    <Content Include="Scripts\i18n\defaults-am_ET.min.js" />
+    <Content Include="Scripts\i18n\defaults-ar_AR.js" />
+    <Content Include="Scripts\i18n\defaults-ar_AR.min.js" />
+    <Content Include="Scripts\i18n\defaults-bg_BG.js" />
+    <Content Include="Scripts\i18n\defaults-bg_BG.min.js" />
+    <Content Include="Scripts\i18n\defaults-cs_CZ.js" />
+    <Content Include="Scripts\i18n\defaults-cs_CZ.min.js" />
+    <Content Include="Scripts\i18n\defaults-da_DK.js" />
+    <Content Include="Scripts\i18n\defaults-da_DK.min.js" />
+    <Content Include="Scripts\i18n\defaults-de_DE.js" />
+    <Content Include="Scripts\i18n\defaults-de_DE.min.js" />
+    <Content Include="Scripts\i18n\defaults-en_US.js" />
+    <Content Include="Scripts\i18n\defaults-en_US.min.js" />
+    <Content Include="Scripts\i18n\defaults-es_CL.js" />
+    <Content Include="Scripts\i18n\defaults-es_CL.min.js" />
+    <Content Include="Scripts\i18n\defaults-es_ES.js" />
+    <Content Include="Scripts\i18n\defaults-es_ES.min.js" />
+    <Content Include="Scripts\i18n\defaults-et_EE.js" />
+    <Content Include="Scripts\i18n\defaults-et_EE.min.js" />
+    <Content Include="Scripts\i18n\defaults-eu.js" />
+    <Content Include="Scripts\i18n\defaults-eu.min.js" />
+    <Content Include="Scripts\i18n\defaults-fa_IR.js" />
+    <Content Include="Scripts\i18n\defaults-fa_IR.min.js" />
+    <Content Include="Scripts\i18n\defaults-fi_FI.js" />
+    <Content Include="Scripts\i18n\defaults-fi_FI.min.js" />
+    <Content Include="Scripts\i18n\defaults-fr_FR.js" />
+    <Content Include="Scripts\i18n\defaults-fr_FR.min.js" />
+    <Content Include="Scripts\i18n\defaults-hr_HR.js" />
+    <Content Include="Scripts\i18n\defaults-hr_HR.min.js" />
+    <Content Include="Scripts\i18n\defaults-hu_HU.js" />
+    <Content Include="Scripts\i18n\defaults-hu_HU.min.js" />
+    <Content Include="Scripts\i18n\defaults-id_ID.js" />
+    <Content Include="Scripts\i18n\defaults-id_ID.min.js" />
+    <Content Include="Scripts\i18n\defaults-it_IT.js" />
+    <Content Include="Scripts\i18n\defaults-it_IT.min.js" />
+    <Content Include="Scripts\i18n\defaults-ja_JP.js" />
+    <Content Include="Scripts\i18n\defaults-ja_JP.min.js" />
+    <Content Include="Scripts\i18n\defaults-kh_KM.js" />
+    <Content Include="Scripts\i18n\defaults-kh_KM.min.js" />
+    <Content Include="Scripts\i18n\defaults-ko_KR.js" />
+    <Content Include="Scripts\i18n\defaults-ko_KR.min.js" />
+    <Content Include="Scripts\i18n\defaults-lt_LT.js" />
+    <Content Include="Scripts\i18n\defaults-lt_LT.min.js" />
+    <Content Include="Scripts\i18n\defaults-lv_LV.js" />
+    <Content Include="Scripts\i18n\defaults-lv_LV.min.js" />
+    <Content Include="Scripts\i18n\defaults-nb_NO.js" />
+    <Content Include="Scripts\i18n\defaults-nb_NO.min.js" />
+    <Content Include="Scripts\i18n\defaults-nl_NL.js" />
+    <Content Include="Scripts\i18n\defaults-nl_NL.min.js" />
+    <Content Include="Scripts\i18n\defaults-pl_PL.js" />
+    <Content Include="Scripts\i18n\defaults-pl_PL.min.js" />
+    <Content Include="Scripts\i18n\defaults-pt_BR.js" />
+    <Content Include="Scripts\i18n\defaults-pt_BR.min.js" />
+    <Content Include="Scripts\i18n\defaults-pt_PT.js" />
+    <Content Include="Scripts\i18n\defaults-pt_PT.min.js" />
+    <Content Include="Scripts\i18n\defaults-ro_RO.js" />
+    <Content Include="Scripts\i18n\defaults-ro_RO.min.js" />
+    <Content Include="Scripts\i18n\defaults-ru_RU.js" />
+    <Content Include="Scripts\i18n\defaults-ru_RU.min.js" />
+    <Content Include="Scripts\i18n\defaults-sk_SK.js" />
+    <Content Include="Scripts\i18n\defaults-sk_SK.min.js" />
+    <Content Include="Scripts\i18n\defaults-sl_SI.js" />
+    <Content Include="Scripts\i18n\defaults-sl_SI.min.js" />
+    <Content Include="Scripts\i18n\defaults-sv_SE.js" />
+    <Content Include="Scripts\i18n\defaults-sv_SE.min.js" />
+    <Content Include="Scripts\i18n\defaults-tr_TR.js" />
+    <Content Include="Scripts\i18n\defaults-tr_TR.min.js" />
+    <Content Include="Scripts\i18n\defaults-ua_UA.js" />
+    <Content Include="Scripts\i18n\defaults-ua_UA.min.js" />
+    <Content Include="Scripts\i18n\defaults-vi_VN.js" />
+    <Content Include="Scripts\i18n\defaults-vi_VN.min.js" />
+    <Content Include="Scripts\i18n\defaults-zh_CN.js" />
+    <Content Include="Scripts\i18n\defaults-zh_CN.min.js" />
+    <Content Include="Scripts\i18n\defaults-zh_TW.js" />
+    <Content Include="Scripts\i18n\defaults-zh_TW.js.map" />
+    <Content Include="Scripts\i18n\defaults-zh_CN.js.map" />
+    <Content Include="Scripts\i18n\defaults-vi_VN.js.map" />
+    <Content Include="Scripts\i18n\defaults-ua_UA.js.map" />
+    <Content Include="Scripts\i18n\defaults-tr_TR.js.map" />
+    <Content Include="Scripts\i18n\defaults-sv_SE.js.map" />
+    <Content Include="Scripts\i18n\defaults-sl_SI.js.map" />
+    <Content Include="Scripts\i18n\defaults-sk_SK.js.map" />
+    <Content Include="Scripts\i18n\defaults-ru_RU.js.map" />
+    <Content Include="Scripts\i18n\defaults-ro_RO.js.map" />
+    <Content Include="Scripts\i18n\defaults-pt_PT.js.map" />
+    <Content Include="Scripts\i18n\defaults-pt_BR.js.map" />
+    <Content Include="Scripts\i18n\defaults-pl_PL.js.map" />
+    <Content Include="Scripts\i18n\defaults-nl_NL.js.map" />
+    <Content Include="Scripts\i18n\defaults-nb_NO.js.map" />
+    <Content Include="Scripts\i18n\defaults-lv_LV.js.map" />
+    <Content Include="Scripts\i18n\defaults-lt_LT.js.map" />
+    <Content Include="Scripts\i18n\defaults-ko_KR.js.map" />
+    <Content Include="Scripts\i18n\defaults-kh_KM.js.map" />
+    <Content Include="Scripts\i18n\defaults-ja_JP.js.map" />
+    <Content Include="Scripts\i18n\defaults-it_IT.js.map" />
+    <Content Include="Scripts\i18n\defaults-id_ID.js.map" />
+    <Content Include="Scripts\i18n\defaults-hu_HU.js.map" />
+    <Content Include="Scripts\i18n\defaults-hr_HR.js.map" />
+    <Content Include="Scripts\i18n\defaults-fr_FR.js.map" />
+    <Content Include="Scripts\i18n\defaults-fi_FI.js.map" />
+    <Content Include="Scripts\i18n\defaults-fa_IR.js.map" />
+    <Content Include="Scripts\i18n\defaults-eu.js.map" />
+    <Content Include="Scripts\i18n\defaults-et_EE.js.map" />
+    <Content Include="Scripts\i18n\defaults-es_ES.js.map" />
+    <Content Include="Scripts\i18n\defaults-es_CL.js.map" />
+    <Content Include="Scripts\i18n\defaults-en_US.js.map" />
+    <Content Include="Scripts\i18n\defaults-de_DE.js.map" />
+    <Content Include="Scripts\i18n\defaults-da_DK.js.map" />
+    <Content Include="Scripts\i18n\defaults-cs_CZ.js.map" />
+    <Content Include="Scripts\i18n\defaults-bg_BG.js.map" />
+    <Content Include="Scripts\i18n\defaults-ar_AR.js.map" />
+    <Content Include="Scripts\i18n\defaults-am_ET.js.map" />
+    <Content Include="Scripts\bootstrap-select.min.js.map" />
+    <Content Include="Scripts\bootstrap-select.js.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\HumanResourceServiceScripts\LeaveApplicationScripts\LeaveApplication.js" />
+    <Content Include="Scripts\i18n\defaults-zh_TW.min.js" />
     <Content Include="Scripts\InventoryServiceScripts\StoreRequisitionScripts\StoreRequisition.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -704,19 +933,53 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\ResetEmployeePassword.cshtml" />
     <Content Include="Views\Account\SendPasswordResetLink.cshtml" />
+    <Content Include="Views\FinanceHome\_FinanceSidebar.cshtml" />
+    <Content Include="Views\FinanceHome\_EmployeeBalanceWidget.cshtml" />
+    <Content Include="Views\FinanceHome\FinanceInfo.cshtml" />
+    <Content Include="Views\HumanResourceHome\HumanResourceInfo.cshtml" />
+    <Content Include="Views\HumanResourceHome\_HumanResourceSidebar.cshtml" />
+    <Content Include="Views\HumanResourceHome\_EmployeeLeaveBalanceWidget.cshtml" />
     <None Include="Web References\EmployeeAccountWebServiceReference\EmployeeAccountWebService.wsdl" />
     <Content Include="Web References\EmployeeAccountWebServiceReference\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\FundsClaimManagementWebServiceReference\FundsClaimManagementWebService.wsdl" />
+    <Content Include="Web References\FundsClaimManagementWebServiceReference\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\FundsManagementWebServiceReference\FundsManagementWebService.wsdl" />
+    <None Include="Web References\FundsManagementWebServiceReference\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\HumanResourceManagementWebServiceRef\HumanResourceManagementWS.wsdl" />
+    <Content Include="Web References\HumanResourceManagementWebServiceRef\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\InventoryManagementWebServiceRef\InventoryManagementWS.wsdl" />
+    <Content Include="Web References\InventoryManagementWebServiceRef\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\PortalApprovalManagerWebServiceRef\PortalApprovalManager.wsdl" />
+    <Content Include="Web References\PortalApprovalManagerWebServiceRef\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\ProcurementManagementWebServiceRef\ProcurementManagementWS.wsdl" />
+    <Content Include="Web References\ProcurementManagementWebServiceRef\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\AdminLTE\js\AdminLTE\" />
-    <Folder Include="Views\FinanceHome\" />
-    <Folder Include="Views\HumanResourceHome\" />
     <Folder Include="Views\InventoryHome\" />
     <Folder Include="Views\PayrollHome\" />
+    <Folder Include="Views\PettyCash\" />
     <Folder Include="Views\ProcurementHome\" />
     <Folder Include="Views\PurchaseRequisition\" />
     <Folder Include="Views\StoreRequisition\" />
@@ -747,6 +1010,72 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>DynamicsNAV365_Staff_WebPortal_EmployeeAccountWebServiceReference_EmployeeAccountWebService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/FundsClaimManagementWebService">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\FundsClaimManagementWebServiceReference\</RelPath>
+      <UpdateFromURL>http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/FundsClaimManagementWebService</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>DynamicsNAV365_Staff_WebPortal_FundsClaimManagementWebServiceReference_FundsClaimManagementWebService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/FundsManagementWebService">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\FundsManagementWebServiceReference\</RelPath>
+      <UpdateFromURL>http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/FundsManagementWebService</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>DynamicsNAV365_Staff_WebPortal_FundsManagementWebServiceReference_FundsManagementWebService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/HumanResourceManagementWS">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\HumanResourceManagementWebServiceRef\</RelPath>
+      <UpdateFromURL>http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/HumanResourceManagementWS</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>DynamicsNAV365_Staff_WebPortal_HumanResourceManagementWebServiceRef_HumanResourceManagementWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/InventoryManagementWS">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\InventoryManagementWebServiceRef\</RelPath>
+      <UpdateFromURL>http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/InventoryManagementWS</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>DynamicsNAV365_Staff_WebPortal_InventoryManagementWebServiceRef_InventoryManagementWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/PortalApprovalManager">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PortalApprovalManagerWebServiceRef\</RelPath>
+      <UpdateFromURL>http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/PortalApprovalManager</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>DynamicsNAV365_Staff_WebPortal_PortalApprovalManagerWebServiceRef_PortalApprovalManager</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/ProcurementManagementWS">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ProcurementManagementWebServiceRef\</RelPath>
+      <UpdateFromURL>http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/ProcurementManagementWS</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>DynamicsNAV365_Staff_WebPortal_ProcurementManagementWebServiceRef_ProcurementManagementWS</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <PropertyGroup>

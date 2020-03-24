@@ -2491,6 +2491,14 @@ select.form-control[multiple],
     box-shadow: 0 12px 20px -10px rgba(0, 188, 212, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(0, 188, 212, 0.2);
 }
 
+.card [data-background-color="company_card"] {
+	background-color:rgb(51, 46, 126);
+}
+
+.card [data-background-color="company_card_login"] {
+	background-color:rgb(245, 210, 90);
+}
+
 .card [data-background-color="green"] {
     background: linear-gradient(60deg, #66bb6a, #43a047);
     box-shadow: 0 12px 20px -10px rgba(76, 175, 80, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(76, 175, 80, 0.2);
@@ -2510,8 +2518,9 @@ select.form-control[multiple],
     background: linear-gradient(60deg, #000000, #000000);
 }
 
-.card [data-background-color="company_card"] {
-    background: linear-gradient(60deg, #332e7e, #332e7e);
+.card [data-background-color="icdc"] {
+    background: linear-gradient(60deg, #ef5350, #e53935);
+    /*box-shadow: 0 12px 20px -10px #000000, 0 4px 20px 0px #000000, 0 7px 8px -5px #000000*/;
 }
 
 .card [data-background-color] {

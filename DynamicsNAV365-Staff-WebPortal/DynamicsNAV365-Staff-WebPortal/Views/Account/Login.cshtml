@@ -16,7 +16,7 @@
 <div class="row">
 	<div class="col-md-4 col-md-offset-4">
 		<div class="card">
-			<div class="card-header text-center" data-background-color="blue">
+			<div class="card-header text-center" data-background-color="company_card">
 				<h4 class="title"><i>Employee Self-Service Portal</i></h4>
 			</div>
 			<div class="card-content">
@@ -40,19 +40,19 @@
 						@Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
 					</div>
 					<div class="form-group text-center">
-						<button class="btn ladda-button" type="submit" data-style="slide-right" data-background-color="company_card">
+						<button class="btn ladda-button" type="submit" data-style="slide-right" data-background-color="company_card_login">
 							<span class="ladda-label">
-								Login
+								<strong>Login</strong>
 							</span>
 						</button><br />
-						<a href="@Url.Action("SendPasswordResetLink", "Account")">Forgot Password?</a>
+						<a href="@Url.Action("SendPasswordResetLink", "Account")"><strong>Forgot Password?</strong></a>
 					</div>
 				}
 			</div>
 			<div class="card-footer">
 				<div class="row">
 					<div class="col-md-12 text-center" style="background-color:inherit">
-						First time Login ? <a href="@Url.Action("SendPasswordResetLink", "Account")">Create Password here</a>
+						First time Login ? <a href="@Url.Action("SendPasswordResetLink", "Account")"><strong>Click here</strong></a>
 					</div>
 				</div>
 			</div>
