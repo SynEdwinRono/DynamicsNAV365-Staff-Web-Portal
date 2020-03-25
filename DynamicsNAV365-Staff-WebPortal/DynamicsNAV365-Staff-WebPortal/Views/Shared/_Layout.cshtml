@@ -28,7 +28,7 @@
 	<link href="~/Content/AdminLTE/css/AdminLTE.css" rel="stylesheet" type="text/css" />
 	<!--End Sysre CSS-->
 
-	<link href="~/Content/ladda-themeless.min.css" rel="stylesheet" />
+	<link href="~/Content/ladda-themeless.css" rel="stylesheet" />
 	<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
 	<link href="~/Content/SysreThemes/dynamics-nav-theme.css" rel="stylesheet" />
 
@@ -63,11 +63,11 @@
 							</a>
 							<ul class="dropdown-menu">
 								<!-- User image -->
-								<li class="user-header bg-black">
+								<li class="user-header" data-background-color="company_card">
 									<img src="~/Content/images/photo_placeholder.png" class="img-circle" alt="User Image" />
 									<p>
 										@HttpContext.Current.User.Identity.Name
-										<small>Staff Portal</small>
+										<small>@ServiceConnection.CompanyName Staff</small>
 									</p>
 								</li>
 								<!-- Menu Footer-->
@@ -116,6 +116,7 @@
 	<script src="~/Content/AdminLTE/js/AdminLTE/app.js" type="text/javascript"></script>
 	<script src="~/Content/AdminLTE/js/AdminLTE/dashboard.js" type="text/javascript"></script>
 	<!--End Admin LTE Dashboard JS-->
+
 	<!--Material Dashboard JS-->
 	<script src="~/Content/MaterialUI/assets/js/material.min.js"></script>
 	<script src="~/Content/MaterialUI/assets/js/arrive.min.js"></script>
@@ -137,8 +138,10 @@
 	<script src="~/Scripts/jquery.blockUI.js"></script>
 
 	<script type="text/javascript">
+
 		var AJAXUrls = {
-		//Dimension urls
+
+        	//Dimension urls
             GetGlobalDimension1Codes: '@Url.Action("GetGlobalDimension1Codes", "FinanceHome")',
             GetGlobalDimension2Codes: '@Url.Action("GetGlobalDimension2Codes", "FinanceHome")',
             GetShortcutDimension3Codes: '@Url.Action("GetShortcutDimension3Codes", "FinanceHome")',
@@ -159,7 +162,12 @@
 
 			LoadPurchaseRequisitionDocuments: '@Url.Action("LoadPurchaseRequisitionDocuments", "PurchaseRequisition")',
 			GetPurchaseRequisitionDocumentByLineNo: '@Url.Action("GetPurchaseRequisitionDocument", "PurchaseRequisition")',
-			UploadPurchaseRequsitionAttachments: '@Url.Action("UploadPurchaseRequsitionAttachments", "PurchaseRequisition")',
+		    UploadPurchaseRequsitionAttachments: '@Url.Action("UploadPurchaseRequsitionAttachments", "PurchaseRequisition")',
+
+
+		    LoadStoreRequisitionDocuments: '@Url.Action("LoadStoreRequisitionDocuments", "StoreRequisition")',
+		    GetStoreRequisitionDocumentByLineNo: '@Url.Action("GetStoreRequisitionDocument", "StoreRequisition")',
+		    UploadStoreRequisitionAttachments: '@Url.Action("UploadStoreRequisitionAttachments", "StoreRequisition")',
 
 			LoadAttachedDocuments: '@Url.Action("LoadAttachedDocuments", "FundsClaim")',
 			UploadDocument: '@Url.Action("UploadDocument", "FundsClaim")',
@@ -175,8 +183,7 @@
         	GetImprestAmount: '@Url.Action("GetImprestAmount", "Imprest")',
         	CreateImprestLine: '@Url.Action("CreateImprestLine", "Imprest")',
         	ModifyImprestLine: '@Url.Action("ModifyImprestLine", "Imprest")',
-			DeleteImprestLine: '@Url.Action("DeleteImprestLine", "Imprest")',
-			GetForeignTravelMatrix: '@Url.Action("GetForeignTravelMatrix", "Imprest")',
+        	DeleteImprestLine: '@Url.Action("DeleteImprestLine", "Imprest")',
 
         	//Imprest Surrender urls
         	CreateImprestSurrenderLine: '@Url.Action("CreateImprestSurrenderLine", "ImprestSurrender")',
@@ -216,15 +223,14 @@
         	GetPurchaseRequisitionItems: '@Url.Action("GetPurchaseRequisitionItems", "PurchaseRequisition")',
         	GetPurchaseRequisitionFixedAssets: '@Url.Action("GetPurchaseRequisitionFixedAssets", "PurchaseRequisition")',
 
-			//Individual Appraisal urls
-			GetAppraisalLines: '@Url.Action("GetAppraisalLines", "Appraisal")',
-			ModifyAppraisalLine: '@Url.Action("ModifyAppraisalLine", "Appraisal")',
-        	GetOrganizationAppraisalCodes: '@Url.Action("GetOrganizationAppraisalCodes", "Appraisal")',
-        	GetDepartmentalAppraisalCodes: '@Url.Action("GetDepartmentalAppraisalCodes", "Appraisal")',
-        	GetDivisionalAppraisalCodes: '@Url.Action("GetDivisionalAppraisalCodes", "Appraisal")',
-        	CreateIndividualAppraisalLine: '@Url.Action("CreateIndividualAppraisalLine", "Appraisal")',
-        	ModifyIndividualAppraisalLine: '@Url.Action("ModifyIndividualAppraisalLine", "Appraisal")',
-			GetAppraisalLine: '@Url.Action("GetAppraisalLine", "Appraisal")',
+        	//Individual Appraisal urls
+        	GetOrganizationAppraisalCodes: '@Url.Action("GetOrganizationAppraisalCodes", "EmployeeAppraisal")',
+        	GetDepartmentalAppraisalCodes: '@Url.Action("GetDepartmentalAppraisalCodes", "EmployeeAppraisal")',
+        	GetDivisionalAppraisalCodes: '@Url.Action("GetDivisionalAppraisalCodes", "EmployeeAppraisal")',
+        	CreateIndividualAppraisalLine: '@Url.Action("CreateIndividualAppraisalLine", "EmployeeAppraisal")',
+        	GetIndividualAppraisalLines: '@Url.Action("GetIndividualAppraisalLines", "EmployeeAppraisal")',
+        	ModifyIndividualAppraisalLine: '@Url.Action("ModifyIndividualAppraisalLine", "EmployeeAppraisal")',
+        	GetIndividualAppraisalLineByLineNo: '@Url.Action("GetIndividualAppraisalLine", "EmployeeAppraisal")',
 
             //Store requisition urls
         	GetStoreRequisitionAmount: '@Url.Action("GetStoreRequisitionAmount", "StoreRequisition")',
@@ -241,10 +247,9 @@
             GetLeaveEndDate: '@Url.Action("GetLeaveEndDate", "LeaveApplication")',
         	GetLeaveReturnDate: '@Url.Action("GetLeaveReturnDate", "LeaveApplication")',
         	InsertLeaveApplicationDocuments: '@Url.Action("InsertLeaveApplicationDocuments", "LeaveApplication")',
-        	LoadLeaveApplicationDocuments: '@Url.Action("LoadLeaveApplicationDocuments", "LeaveApplication")',
+			GetLeaveApplicationDocuments: '@Url.Action("GetLeaveApplicationDocuments", "LeaveApplication")',
         	UploadLeaveApplicationDocument: '@Url.Action("UploadLeaveApplicationDocument", "LeaveApplication")',
-			GetLeaveApplicationDocumentByLineNo: '@Url.Action("GetLeaveApplicationDocumentByLineNo", "LeaveApplication")',
-			GetApplicationDocuments: '@Url.Action("GetApplicationDocuments", "LeaveApplication")',
+        	GetLeaveApplicationDocumentByLineNo: '@Url.Action("GetLeaveApplicationDocumentByLineNo", "LeaveApplication")',
 
         	//Leave Reimbursement urls
         	GetLeaveApplicationDetails: '@Url.Action("GetLeaveApplicationDetails", "LeaveReimbursement")',
@@ -285,7 +290,7 @@
 			GetTransportRequisitionDocuments: '@Url.Action("GetTransportRequisitionDocuments", "VehicleRequisition")',
 			GetTransportRequisitionDocumentByLineNo: '@Url.Action("GetTransportRequisitionDocumentByLineNo", "VehicleRequisition")',
 			UploadTransportRequisitionDocument: '@Url.Action("UploadTransportRequisitionDocument", "VehicleRequisition")'
-		}
+        }
 
 		$("input[type=text]").keyup(function () {
 			$("#submitBtn").prop("disabled", true);
