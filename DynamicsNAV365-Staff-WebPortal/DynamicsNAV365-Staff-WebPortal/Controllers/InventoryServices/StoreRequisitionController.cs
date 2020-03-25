@@ -21,18 +21,21 @@ namespace DynamicsNAV365_Staff_WebPortal.Controllers.InventoryServices
         SuccessResponseController successResponse = new SuccessResponseController();
         InfoResponseController infoResponse = new InfoResponseController();
         ErrorResponseController errorResponse = new ErrorResponseController();
-
         private string responseHeader = "";
         private string responseMessage = "";
         private string detailedResponseMessage = "";
-        private string returnControllerName = "";
-        private string returnActionName = "";
-        private string returnLinkName = "";
-        private bool hasParameters = false;
-        private string parameters = "";
-        private string cancelControllerName = "";
-        private string cancelActionName = "";
-        private string cancelLinkName = "";
+
+        private string button1ControllerName = "";
+        private string button1ActionName = "";
+        private bool button1HasParameters = false;
+        private string button1Parameters = "";
+        private string button1Name = "";
+
+        private string button2ControllerName = "";
+        private string button2ActionName = "";
+        private bool button2HasParameters = false;
+        private string button2Parameters = "";
+        private string button2Name = "";
 
         IQueryable<Locations> locations = null;
         IQueryable<DimensionValues> globalDimension1Values = null;
@@ -70,14 +73,14 @@ namespace DynamicsNAV365_Staff_WebPortal.Controllers.InventoryServices
                     responseHeader = "Open Store Requisition";
                     responseMessage = "An open store requisition exists for employee no. " + employeeNo + ", finalize on this store requisition before creating a new one.";
                     detailedResponseMessage = "An open store requisition exists for employee no. " + employeeNo + ", finalize on this store requisition before creating a new one.";
-                    returnControllerName = "StoreRequisition";
-                    returnActionName = "StoreRequisitionHistory";
-                    returnLinkName = "Ok";
-                    hasParameters = false;
-                    parameters = "";
+                    button1ControllerName = "StoreRequisition";
+                    button1ActionName = "StoreRequisitionHistory";
+                    button1Name = "Ok";
+                    button1HasParameters = false;
+                    button1Parameters = "";
                     return errorResponse.ApplicationError(responseHeader, responseMessage, detailedResponseMessage,
-                                                          returnControllerName, returnActionName, returnLinkName,
-                                                          hasParameters, parameters);
+                                                          button1ControllerName, button1ActionName, button1HasParameters, button1Parameters, button1Name,
+                                                          button2ControllerName, button2ActionName, button2HasParameters, button2Parameters, button2Name);
                 }
                 //End check open store requisition
 
@@ -175,14 +178,14 @@ namespace DynamicsNAV365_Staff_WebPortal.Controllers.InventoryServices
                             responseHeader = "Success";
                             responseMessage = "Store requisition no." + StoreRequisitionObj.No + " was successfully sent for approval. Check with the " + companyName + " inventory department for approval status.";
                             detailedResponseMessage = "Store requisition no." + StoreRequisitionObj.No + " was successfully sent for approval. Check with the " + companyName + " inventory department for approval status.";
-                            returnControllerName = "StoreRequisition";
-                            returnActionName = "StoreRequisitionHistory";
-                            returnLinkName = "Ok";
-                            hasParameters = false;
-                            parameters = "";
-                            return successResponse.ApplicationSuccess(responseHeader, responseMessage,
-                                detailedResponseMessage, returnControllerName, returnActionName,
-                                returnLinkName, hasParameters, parameters);
+                            button1ControllerName = "StoreRequisition";
+                            button1ActionName = "StoreRequisitionHistory";
+                            button1Name = "Ok";
+                            button1HasParameters = false;
+                            button1Parameters = "";
+                            return successResponse.ApplicationSuccess(responseHeader, responseMessage, detailedResponseMessage,
+                                                                  button1ControllerName, button1ActionName, button1HasParameters, button1Parameters, button1Name,
+                                                                  button2ControllerName, button2ActionName, button2HasParameters, button2Parameters, button2Name);
                         }
                         else
                         {
@@ -196,14 +199,14 @@ namespace DynamicsNAV365_Staff_WebPortal.Controllers.InventoryServices
                         responseHeader = "Store Requisition NotFound";
                         responseMessage = "The store requisition no." + StoreRequisitionObj.No + " was not found under employee no." + AccountController.GetEmployeeNo();
                         detailedResponseMessage = "The store requisition no." + StoreRequisitionObj.No + " was not found under employee no." + AccountController.GetEmployeeNo();
-                        returnControllerName = "StoreRequisition";
-                        returnActionName = "StoreRequisitionHistory";
-                        returnLinkName = "Ok";
-                        hasParameters = false;
-                        parameters = "";
+                        button1ControllerName = "StoreRequisition";
+                        button1ActionName = "StoreRequisitionHistory";
+                        button1Name = "Ok";
+                        button1HasParameters = false;
+                        button1Parameters = "";
                         return errorResponse.ApplicationError(responseHeader, responseMessage, detailedResponseMessage,
-                                                               returnControllerName, returnActionName, returnLinkName,
-                                                               hasParameters, parameters);
+                                                          button1ControllerName, button1ActionName, button1HasParameters, button1Parameters, button1Name,
+                                                          button2ControllerName, button2ActionName, button2HasParameters, button2Parameters, button2Name);
                     }
                 }
                 catch (Exception ex)
@@ -264,14 +267,14 @@ namespace DynamicsNAV365_Staff_WebPortal.Controllers.InventoryServices
                         responseHeader = "Store Requisition Pending Approval";
                         responseMessage = "The stores requisition no." + StoreRequisitionNo + " is already submitted for approval. Editing not allowed.";
                         detailedResponseMessage = "The stores requisition no." + StoreRequisitionNo + " is already submitted for approval. Editing not allowed.";
-                        returnControllerName = "StoreRequisition";
-                        returnActionName = "StoreRequisitionHistory";
-                        returnLinkName = "Ok";
-                        hasParameters = false;
-                        parameters = "";
+                        button1ControllerName = "StoreRequisition";
+                        button1ActionName = "StoreRequisitionHistory";
+                        button1Name = "Ok";
+                        button1HasParameters = false;
+                        button1Parameters = "";
                         return errorResponse.ApplicationError(responseHeader, responseMessage, detailedResponseMessage,
-                                                               returnControllerName, returnActionName, returnLinkName,
-                                                               hasParameters, parameters);
+                                                          button1ControllerName, button1ActionName, button1HasParameters, button1Parameters, button1Name,
+                                                          button2ControllerName, button2ActionName, button2HasParameters, button2Parameters, button2Name);
                     }
 
                     //if store requisition is released
@@ -280,14 +283,14 @@ namespace DynamicsNAV365_Staff_WebPortal.Controllers.InventoryServices
                         responseHeader = "Store Requisition Approved";
                         responseMessage = "The store requisition no." + StoreRequisitionNo + " is already approved. Editing not allowed.";
                         detailedResponseMessage = "The store requisition no." + StoreRequisitionNo + " is already approved. Editing not allowed.";
-                        returnControllerName = "StoreRequisition";
-                        returnActionName = "StoreRequisitionHistory";
-                        returnLinkName = "Ok";
-                        hasParameters = false;
-                        parameters = "";
+                        button1ControllerName = "StoreRequisition";
+                        button1ActionName = "StoreRequisitionHistory";
+                        button1Name = "Ok";
+                        button1HasParameters = false;
+                        button1Parameters = "";
                         return errorResponse.ApplicationError(responseHeader, responseMessage, detailedResponseMessage,
-                                                               returnControllerName, returnActionName, returnLinkName,
-                                                               hasParameters, parameters);
+                                                          button1ControllerName, button1ActionName, button1HasParameters, button1Parameters, button1Name,
+                                                          button2ControllerName, button2ActionName, button2HasParameters, button2Parameters, button2Name);
                     }
                     //if store requisition is rejected
                     if (storeRequisitionStatus.Equals("Rejected"))
@@ -295,18 +298,17 @@ namespace DynamicsNAV365_Staff_WebPortal.Controllers.InventoryServices
                         responseHeader = "Store Requisition Rejected";
                         responseMessage = "The store requisition no." + StoreRequisitionNo + " was rejected. Editing will reopen the document. Do you want to continue?";
                         detailedResponseMessage = "The store requisition no." + StoreRequisitionNo + " was rejected. Editing will reopen the document. Do you want to continue?";
-                        returnControllerName = "StoreRequisition";
-                        returnActionName = "EditStoreRequisition";
-                        returnLinkName = "Yes";
-                        hasParameters = true;
-                        parameters = "?StoreRequisitionNo=" + StoreRequisitionNo;
-                        cancelControllerName = "StoreRequisition";
-                        cancelActionName = "StoreRequisitionHistory";
-                        cancelLinkName = "No";
+                        button1ControllerName = "StoreRequisition";
+                        button1ActionName = "EditStoreRequisition";
+                        button1Name = "Yes";
+                        button1HasParameters = true;
+                        button1Parameters = "?StoreRequisitionNo=" + StoreRequisitionNo;
+                        button2ControllerName = "StoreRequisition";
+                        button2ActionName = "StoreRequisitionHistory";
+                        button2Name = "No";
                         return infoResponse.ApplicationConfirm(responseHeader, responseMessage, detailedResponseMessage,
-                                                               returnControllerName, returnActionName, returnLinkName,
-                                                               hasParameters, parameters, cancelControllerName,
-                                                               cancelActionName, cancelLinkName);
+                                                          button1ControllerName, button1ActionName, button1HasParameters, button1Parameters, button1Name,
+                                                          button2ControllerName, button2ActionName, button2HasParameters, button2Parameters, button2Name);
                     }
                     //if store requisition is posted/reversed
                     if (storeRequisitionStatus.Equals("Posted") || storeRequisitionStatus.Equals("Reversed"))
@@ -314,14 +316,14 @@ namespace DynamicsNAV365_Staff_WebPortal.Controllers.InventoryServices
                         responseHeader = "Store Requisition Posted";
                         responseMessage = "The store requisition no." + StoreRequisitionNo + " is already posted. Editing not allowed.";
                         detailedResponseMessage = "The store requisition no." + StoreRequisitionNo + " is already posted. Editing not allowed.";
-                        returnControllerName = "StoreRequisition";
-                        returnActionName = "StoreRequisitionHistory";
-                        returnLinkName = "Ok";
-                        hasParameters = false;
-                        parameters = "";
+                        button1ControllerName = "StoreRequisition";
+                        button1ActionName = "StoreRequisitionHistory";
+                        button1Name = "Ok";
+                        button1HasParameters = false;
+                        button1Parameters = "";
                         return errorResponse.ApplicationError(responseHeader, responseMessage, detailedResponseMessage,
-                                                               returnControllerName, returnActionName, returnLinkName,
-                                                               hasParameters, parameters);
+                                                          button1ControllerName, button1ActionName, button1HasParameters, button1Parameters, button1Name,
+                                                          button2ControllerName, button2ActionName, button2HasParameters, button2Parameters, button2Name);
                     }
                     return RedirectToAction("StoreRequisitionHistory", "StoreRequisition");
                 }
@@ -330,14 +332,14 @@ namespace DynamicsNAV365_Staff_WebPortal.Controllers.InventoryServices
                     responseHeader = "Store Requisition NotFound";
                     responseMessage = "The store requisition no." + StoreRequisitionNo + " was not found under employee no." + AccountController.GetEmployeeNo();
                     detailedResponseMessage = "The store requisition no." + StoreRequisitionNo + " was not found under employee no." + AccountController.GetEmployeeNo();
-                    returnControllerName = "StoreRequisition";
-                    returnActionName = "StoreRequisitionHistory";
-                    returnLinkName = "Ok";
-                    hasParameters = false;
-                    parameters = "";
+                    button1ControllerName = "StoreRequisition";
+                    button1ActionName = "StoreRequisitionHistory";
+                    button1Name = "Ok";
+                    button1HasParameters = false;
+                    button1Parameters = "";
                     return errorResponse.ApplicationError(responseHeader, responseMessage, detailedResponseMessage,
-                                                           returnControllerName, returnActionName, returnLinkName,
-                                                           hasParameters, parameters);
+                                                          button1ControllerName, button1ActionName, button1HasParameters, button1Parameters, button1Name,
+                                                          button2ControllerName, button2ActionName, button2HasParameters, button2Parameters, button2Name);
                 }
             }
             catch (Exception ex)
@@ -421,14 +423,14 @@ namespace DynamicsNAV365_Staff_WebPortal.Controllers.InventoryServices
                     responseHeader = "Store Requisition NotFound";
                     responseMessage = "The store requisition no." + StoreRequisitionNo + " was not found for employee no." + AccountController.GetEmployeeNo();
                     detailedResponseMessage = "The store requisition no." + StoreRequisitionNo + " was not found for employee no." + AccountController.GetEmployeeNo();
-                    returnControllerName = "StoreRequisition";
-                    returnActionName = "StoreRequisitionHistory";
-                    returnLinkName = "Ok";
-                    hasParameters = false;
-                    parameters = "";
+                    button1ControllerName = "StoreRequisition";
+                    button1ActionName = "StoreRequisitionHistory";
+                    button1Name = "Ok";
+                    button1HasParameters = false;
+                    button1Parameters = "";
                     return errorResponse.ApplicationError(responseHeader, responseMessage, detailedResponseMessage,
-                                                           returnControllerName, returnActionName, returnLinkName,
-                                                           hasParameters, parameters);
+                                                          button1ControllerName, button1ActionName, button1HasParameters, button1Parameters, button1Name,
+                                                          button2ControllerName, button2ActionName, button2HasParameters, button2Parameters, button2Name);
                 }
             }
             catch (Exception ex)
@@ -504,14 +506,14 @@ namespace DynamicsNAV365_Staff_WebPortal.Controllers.InventoryServices
                             responseHeader = "Success";
                             responseMessage = "Store requisition no." + StoreRequisitionObj.No + " was successfully sent for approval. Check with the " + companyName + " inventory department for approval status.";
                             detailedResponseMessage = "StoreRequisition no." + StoreRequisitionObj.No + " was successfully sent for approval. Check with the " + companyName + " inventory department for approval status.";
-                            returnControllerName = "StoreRequisition";
-                            returnActionName = "StoreRequisitionHistory";
-                            returnLinkName = "Ok";
-                            hasParameters = false;
-                            parameters = "";
-                            return successResponse.ApplicationSuccess(responseHeader, responseMessage,
-                                detailedResponseMessage, returnControllerName, returnActionName,
-                                returnLinkName, hasParameters, parameters);
+                            button1ControllerName = "StoreRequisition";
+                            button1ActionName = "StoreRequisitionHistory";
+                            button1Name = "Ok";
+                            button1HasParameters = false;
+                            button1Parameters = "";
+                            return successResponse.ApplicationSuccess(responseHeader, responseMessage, detailedResponseMessage,
+                                                    button1ControllerName, button1ActionName, button1HasParameters, button1Parameters, button1Name,
+                                                    button2ControllerName, button2ActionName, button2HasParameters, button2Parameters, button2Name);
                         }
                         else
                         {
@@ -525,14 +527,14 @@ namespace DynamicsNAV365_Staff_WebPortal.Controllers.InventoryServices
                         responseHeader = "Store Requisition NotFound";
                         responseMessage = "The store requisition no." + StoreRequisitionObj.No + " was not found for employee no." + AccountController.GetEmployeeNo();
                         detailedResponseMessage = "The store requisition no." + StoreRequisitionObj.No + " was not found for employee no." + AccountController.GetEmployeeNo();
-                        returnControllerName = "StoreRequisition";
-                        returnActionName = "StoreRequisitionHistory";
-                        returnLinkName = "Ok";
-                        hasParameters = false;
-                        parameters = "";
+                        button1ControllerName = "StoreRequisition";
+                        button1ActionName = "StoreRequisitionHistory";
+                        button1Name = "Ok";
+                        button1HasParameters = false;
+                        button1Parameters = "";
                         return errorResponse.ApplicationError(responseHeader, responseMessage, detailedResponseMessage,
-                                                                returnControllerName, returnActionName, returnLinkName,
-                                                                hasParameters, parameters);
+                                                          button1ControllerName, button1ActionName, button1HasParameters, button1Parameters, button1Name,
+                                                          button2ControllerName, button2ActionName, button2HasParameters, button2Parameters, button2Name);
                     }
                 }
                 else
@@ -604,14 +606,14 @@ namespace DynamicsNAV365_Staff_WebPortal.Controllers.InventoryServices
                     responseHeader = "Store Requisition NotFound";
                     responseMessage = "The store requisition no." + StoreRequisitionNo + " was not found for employee no." + AccountController.GetEmployeeNo();
                     detailedResponseMessage = "The store requisition no." + StoreRequisitionNo + " was not found for employee no." + AccountController.GetEmployeeNo();
-                    returnControllerName = "StoreRequisition";
-                    returnActionName = "StoreRequisitionHistory";
-                    returnLinkName = "Ok";
-                    hasParameters = false;
-                    parameters = "";
+                    button1ControllerName = "StoreRequisition";
+                    button1ActionName = "StoreRequisitionHistory";
+                    button1Name = "Ok";
+                    button1HasParameters = false;
+                    button1Parameters = "";
                     return errorResponse.ApplicationError(responseHeader, responseMessage, detailedResponseMessage,
-                                                           returnControllerName, returnActionName, returnLinkName,
-                                                           hasParameters, parameters);
+                                                          button1ControllerName, button1ActionName, button1HasParameters, button1Parameters, button1Name,
+                                                          button2ControllerName, button2ActionName, button2HasParameters, button2Parameters, button2Name);
                 }
             }
             catch (Exception ex)
@@ -937,14 +939,14 @@ namespace DynamicsNAV365_Staff_WebPortal.Controllers.InventoryServices
                     responseHeader = "Store Requisition NotFound";
                     responseMessage = "The store requisition no." + StoreRequisitionNo + " was not found for employee no." + AccountController.GetEmployeeNo();
                     detailedResponseMessage = "The store requisition no." + StoreRequisitionNo + " was not found for employee no." + AccountController.GetEmployeeNo();
-                    returnControllerName = "Approval";
-                    returnActionName = "RequestsToApprove";
-                    returnLinkName = "Ok";
-                    hasParameters = false;
-                    parameters = "";
+                    button1ControllerName = "Approval";
+                    button1ActionName = "RequestsToApprove";
+                    button1Name = "Ok";
+                    button1HasParameters = false;
+                    button1Parameters = "";
                     return errorResponse.ApplicationError(responseHeader, responseMessage, detailedResponseMessage,
-                                                           returnControllerName, returnActionName, returnLinkName,
-                                                           hasParameters, parameters);
+                                                          button1ControllerName, button1ActionName, button1HasParameters, button1Parameters, button1Name,
+                                                          button2ControllerName, button2ActionName, button2HasParameters, button2Parameters, button2Name);
                 }
             }
             catch (Exception ex)
@@ -971,14 +973,14 @@ namespace DynamicsNAV365_Staff_WebPortal.Controllers.InventoryServices
                         responseHeader = "Success";
                         responseMessage = "Store Requisition no." + StoreRequisitionObj.No + " was successfully approved.";
                         detailedResponseMessage = "Store Requisition no." + StoreRequisitionObj.No + " was successfully approved.";
-                        returnControllerName = "Approval";
-                        returnActionName = "RequestsToApprove";
-                        returnLinkName = "Ok";
-                        hasParameters = false;
-                        parameters = "";
-                        return successResponse.ApplicationSuccess(responseHeader, responseMessage,
-                                    detailedResponseMessage, returnControllerName, returnActionName,
-                                    returnLinkName, hasParameters, parameters);
+                        button1ControllerName = "Approval";
+                        button1ActionName = "RequestsToApprove";
+                        button1Name = "Ok";
+                        button1HasParameters = false;
+                        button1Parameters = "";
+                        return successResponse.ApplicationSuccess(responseHeader, responseMessage, detailedResponseMessage,
+                                                    button1ControllerName, button1ActionName, button1HasParameters, button1Parameters, button1Name,
+                                                    button2ControllerName, button2ActionName, button2HasParameters, button2Parameters, button2Name);
                     }
                     else
                     {
@@ -994,14 +996,14 @@ namespace DynamicsNAV365_Staff_WebPortal.Controllers.InventoryServices
                         responseHeader = "Success";
                         responseMessage = "Store Requisition no." + StoreRequisitionObj.No + " was successfully rejected.";
                         detailedResponseMessage = "Store Requisition no." + StoreRequisitionObj.No + " was successfully rejected.";
-                        returnControllerName = "Approval";
-                        returnActionName = "RequestsToApprove";
-                        returnLinkName = "Ok";
-                        hasParameters = false;
-                        parameters = "";
-                        return successResponse.ApplicationSuccess(responseHeader, responseMessage,
-                                    detailedResponseMessage, returnControllerName, returnActionName,
-                                    returnLinkName, hasParameters, parameters);
+                        button1ControllerName = "Approval";
+                        button1ActionName = "RequestsToApprove";
+                        button1Name = "Ok";
+                        button1HasParameters = false;
+                        button1Parameters = "";
+                        return successResponse.ApplicationSuccess(responseHeader, responseMessage, detailedResponseMessage,
+                                                    button1ControllerName, button1ActionName, button1HasParameters, button1Parameters, button1Name,
+                                                    button2ControllerName, button2ActionName, button2HasParameters, button2Parameters, button2Name);
                     }
                     else
                     {

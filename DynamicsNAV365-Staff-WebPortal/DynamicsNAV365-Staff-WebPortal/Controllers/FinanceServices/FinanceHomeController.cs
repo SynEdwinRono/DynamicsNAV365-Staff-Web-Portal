@@ -1,6 +1,5 @@
 ﻿using DynamicsNAV365_Staff_WebPortal.DynamicsNAVODataServiceReference;
 using DynamicsNAV365_Staff_WebPortal.Models.Account;
-using DynamicsNAV365_Staff_WebPortal.Models.FinanceModels.FinanceHomeModels;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
