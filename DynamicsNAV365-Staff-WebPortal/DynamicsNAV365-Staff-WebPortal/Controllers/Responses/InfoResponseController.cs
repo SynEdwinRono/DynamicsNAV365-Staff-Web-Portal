@@ -3,60 +3,49 @@ using System.Web.Mvc;
 
 namespace DynamicsNAV365_Staff_WebPortal.Controllers.Responses
 {
-	public class InfoResponseController : Controller
+    public class InfoResponseController : Controller
     {
-		string companyName = ServiceConnection.CompanyName;
+        string companyName = ServiceConnection.CompanyName;
 
-		#region Application Info
-		public ActionResult ApplicationInfo(string ResponseHeader, string ResponseMessage, string DetailedResponseMessage, string Button1ControllerName, string Button1ActionName, bool Button1HasParameters, string Button1Parameters, string Button1Name, string Button2ControllerName, string Button2ActionName, bool Button2HasParameters, string Button2Parameters, string Button2Name)
-		{
-			InfoResponseModel infoResponseModel = new InfoResponseModel();
+        #region Application Error
+        public ActionResult ApplicationInfo(string responseHeader, string responseMessage, string detailedResponseMessage, string returnControllerName, string returnActionName, string returnLinkName, bool hasParameters, string parameters)
+        {
+            InfoResponseModel infoResponseModel = new InfoResponseModel();
 
-			infoResponseModel.ResponseType = "INFO";
-			infoResponseModel.ResponseHeader = ResponseHeader;
-			infoResponseModel.ResponseMessage = ResponseMessage;
-			infoResponseModel.DetailedResponseMessage = DetailedResponseMessage;
+            infoResponseModel.ResponseType = "INFO";
+            infoResponseModel.ResponseHeader = responseHeader;
+            infoResponseModel.ResponseMessage = responseMessage;
+            infoResponseModel.DetailedResponseMessage = detailedResponseMessage;
+            infoResponseModel.ReturnControllerName = returnControllerName;
+            infoResponseModel.ReturnActionName = returnActionName;
+            infoResponseModel.ReturnLinkName = returnLinkName;
+            infoResponseModel.HasParameters = hasParameters;
+            infoResponseModel.Parameters = parameters;
+            infoResponseModel.CancelControllerName = "";
+            infoResponseModel.CancelActionName = "";
+            infoResponseModel.CancelLinkName = "";
+            return View("InfoResponse", infoResponseModel);
+        }
 
-			infoResponseModel.Button1ControllerName = Button1ControllerName;
-			infoResponseModel.Button1ActionName = Button1ActionName;
-			infoResponseModel.Button1HasParameters = Button1HasParameters;
-			infoResponseModel.Button1Parameters = Button1Parameters;
-			infoResponseModel.Button1Name = Button1Name;
+        public ActionResult ApplicationConfirm(string responseHeader, string responseMessage, string detailedResponseMessage, string returnControllerName, string returnActionName, string returnLinkName, bool hasParameters, string parameters, string cancelControllerName, string cancelActionName, string cancelLinkName)
+        {
+            InfoResponseModel infoResponseModel = new InfoResponseModel();
 
-			infoResponseModel.Button2ControllerName = Button2ControllerName;
-			infoResponseModel.Button2ActionName = Button2ActionName;
-			infoResponseModel.Button2HasParameters = Button2HasParameters;
-			infoResponseModel.Button2Parameters = Button2Parameters;
-			infoResponseModel.Button2Name = Button2Name;
+            infoResponseModel.ResponseType = "CONFIRM";
+            infoResponseModel.ResponseHeader = responseHeader;
+            infoResponseModel.ResponseMessage = responseMessage;
+            infoResponseModel.DetailedResponseMessage = detailedResponseMessage;
+            infoResponseModel.ReturnControllerName = returnControllerName;
+            infoResponseModel.ReturnActionName = returnActionName;
+            infoResponseModel.ReturnLinkName = returnLinkName;
+            infoResponseModel.HasParameters = hasParameters;
+            infoResponseModel.Parameters = parameters;
+            infoResponseModel.CancelControllerName = cancelControllerName;
+            infoResponseModel.CancelActionName = cancelActionName;
+            infoResponseModel.CancelLinkName = cancelLinkName;
+            return View("ConfirmResponse", infoResponseModel);
+        }
 
-			return View("InfoResponse", infoResponseModel);
-		}
-		#endregion Application Info
-
-		#region Application Confirm Dialog
-		public ActionResult ApplicationConfirm(string ResponseHeader, string ResponseMessage, string DetailedResponseMessage, string Button1ControllerName, string Button1ActionName, bool Button1HasParameters, string Button1Parameters, string Button1Name, string Button2ControllerName, string Button2ActionName, bool Button2HasParameters, string Button2Parameters, string Button2Name)
-		{
-			InfoResponseModel infoResponseModel = new InfoResponseModel();
-
-			infoResponseModel.ResponseType = "CONFIRM";
-			infoResponseModel.ResponseHeader = ResponseHeader;
-			infoResponseModel.ResponseMessage = ResponseMessage;
-			infoResponseModel.DetailedResponseMessage = DetailedResponseMessage;
-
-			infoResponseModel.Button1ControllerName = Button1ControllerName;
-			infoResponseModel.Button1ActionName = Button1ActionName;
-			infoResponseModel.Button1HasParameters = Button1HasParameters;
-			infoResponseModel.Button1Parameters = Button1Parameters;
-			infoResponseModel.Button1Name = Button1Name;
-
-			infoResponseModel.Button2ControllerName = Button2ControllerName;
-			infoResponseModel.Button2ActionName = Button2ActionName;
-			infoResponseModel.Button2HasParameters = Button2HasParameters;
-			infoResponseModel.Button2Parameters = Button2Parameters;
-			infoResponseModel.Button2Name = Button2Name;
-
-			return View("ConfirmResponse", infoResponseModel);
-		}
-		#endregion Application Confirm Dialog
-	}
+        #endregion Application Error
+    }
 }

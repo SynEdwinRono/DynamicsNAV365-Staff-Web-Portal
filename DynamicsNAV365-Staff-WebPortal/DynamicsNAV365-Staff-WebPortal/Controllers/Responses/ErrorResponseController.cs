@@ -4,107 +4,78 @@ using System.Web.Mvc;
 
 namespace DynamicsNAV365_Staff_WebPortal.Controllers.Responses
 {
-	public class ErrorResponseController : Controller
+    public class ErrorResponseController : Controller
     {
-		string companyName = ServiceConnection.CompanyName;
+        string companyName = ServiceConnection.CompanyName;
 
-		#region Application Error
-		public ActionResult ApplicationError(string responseHeader, string responseMessage, string detailedResponseMessage, string button1ControllerName, string button1ActionName, bool button1HasParameters, string button1Parameters, string button1Name, string button2ControllerName, string button2ActionName, bool button2HasParameters, string button2Parameters, string button2Name)
-		{
-			ErrorResponseModel errorResponseObj = new ErrorResponseModel();
+        #region Application Error
+        public ActionResult ApplicationError(string responseHeader, string responseMessage, string detailedResponseMessage, string returnControllerName, string returnActionName, string returnLinkName, bool hasParameters, string parameters)
+        {
+            ErrorResponseModel errorResponseObj = new ErrorResponseModel();
 
-			errorResponseObj.ResponseType = "ERROR";
-			errorResponseObj.ResponseHeader = responseHeader;
-			errorResponseObj.ResponseMessage = responseMessage;
-			errorResponseObj.DetailedResponseMessage = detailedResponseMessage;
+            errorResponseObj.ResponseType = "ERROR";
+            errorResponseObj.ResponseHeader = responseHeader;
+            errorResponseObj.ResponseMessage = responseMessage;
+            errorResponseObj.DetailedResponseMessage = detailedResponseMessage;
+            errorResponseObj.ReturnControllerName = returnControllerName;
+            errorResponseObj.ReturnActionName = returnActionName;
+            errorResponseObj.ReturnLinkName = returnLinkName;
+            errorResponseObj.HasParameters = hasParameters;
+            errorResponseObj.Parameters = parameters;
 
-			errorResponseObj.Button1ControllerName = button1ControllerName;
-			errorResponseObj.Button1ActionName = button1ActionName;
-			errorResponseObj.Button1HasParameters = button1HasParameters;
-			errorResponseObj.Button1Parameters = button1Parameters;
-			errorResponseObj.Button1Name = button1Name;
+            return View("ErrorResponse", errorResponseObj);
+        }
 
-			errorResponseObj.Button2ControllerName = button2ControllerName;
-			errorResponseObj.Button2ActionName = button2ActionName;
-			errorResponseObj.Button2HasParameters = button2HasParameters;
-			errorResponseObj.Button2Parameters = button2Parameters;
-			errorResponseObj.Button2Name = button2Name;
+        public ActionResult ApplicationExceptionError(Exception ex)
+        {
+            ErrorResponseModel errorResponseObj = new ErrorResponseModel();
 
-			return View("ErrorResponse", errorResponseObj);
-		}
-		public ActionResult ApplicationExceptionError(Exception ex)
-		{
-			ErrorResponseModel errorResponseObj = new ErrorResponseModel();
+            errorResponseObj.ResponseType = "ERROR";
+            errorResponseObj.ResponseHeader = "Application Exception Error";
+            errorResponseObj.ResponseMessage = ex.Message;
+            errorResponseObj.DetailedResponseMessage = ex.Message;
+            errorResponseObj.ReturnControllerName = "Home";
+            errorResponseObj.ReturnActionName = "Index";
+            errorResponseObj.ReturnLinkName = "Close";
+            errorResponseObj.HasParameters = false;
+            errorResponseObj.Parameters = "";
 
-			errorResponseObj.ResponseType = "ERROR";
-			errorResponseObj.ResponseHeader = "Application Exception Error";
-			errorResponseObj.ResponseMessage = ex.ToString();
-			errorResponseObj.DetailedResponseMessage = ex.ToString();
+            return View("ErrorResponse", errorResponseObj);
+        }
 
-			errorResponseObj.Button1ControllerName = "Home";
-			errorResponseObj.Button1ActionName = "Index";
-			errorResponseObj.Button1HasParameters = false;
-			errorResponseObj.Button1Parameters = "";
-			errorResponseObj.Button1Name = "Close";
+        #endregion Application Error
 
-			errorResponseObj.Button2ControllerName = "";
-			errorResponseObj.Button2ActionName = "";
-			errorResponseObj.Button2HasParameters = false;
-			errorResponseObj.Button2Parameters = "";
-			errorResponseObj.Button2Name = "";
+        #region Server Errors
+        public ActionResult InternalServerError()
+        {
+            ErrorResponseModel errorResponseModel = new ErrorResponseModel();
+            errorResponseModel.ResponseType = "ERROR";
+            errorResponseModel.ResponseHeader = "500 Internal Server Error";
+            errorResponseModel.ResponseMessage = "The staff portal is unable to connect to the server.<br />" +
+                               "The server could be temporarily unavailable or too busy.Try again in a few minutes.";
+            errorResponseModel.DetailedResponseMessage = "";
+            errorResponseModel.ReturnControllerName = "Account";
+            errorResponseModel.ReturnActionName = "Logout";
+            errorResponseModel.ReturnLinkName = "Ok";
+            return View(errorResponseModel);
+        }
+        public ActionResult GatewayTimeout()
+        {
+            ErrorResponseModel errorResponseObj = new ErrorResponseModel();
+            errorResponseObj.ResponseType = "ERROR";
+            errorResponseObj.ResponseHeader = "504 Gateway Timeout Server Error";
+            errorResponseObj.ResponseMessage = "The staff portal is unable to connect to the server.<br />" +
+                                               "The server could be temporarily unavailable or too busy.Try again in a few minutes.";
+            errorResponseObj.DetailedResponseMessage = "";
+            errorResponseObj.ReturnControllerName = "Account";
+            errorResponseObj.ReturnActionName = "Logout";
+            errorResponseObj.ReturnLinkName = "Ok";
+            errorResponseObj.HasParameters = false;
+            errorResponseObj.Parameters = "";
 
-			return View("ErrorResponse", errorResponseObj);
-		}
-		#endregion Application Error
+            return View("ErrorResponse", errorResponseObj);
+        }
+        #endregion Server Errors
 
-		#region Server Errors
-		public ActionResult InternalServerError()
-		{
-			ErrorResponseModel errorResponseObj = new ErrorResponseModel();
-			errorResponseObj.ResponseType = "ERROR";
-			errorResponseObj.ResponseHeader = "500 Internal Server Error";
-			errorResponseObj.ResponseMessage = "The Staff portal is unable to connect to the server.<br />" +
-											   "The server could be temporarily unavailable or too busy.Try again in a few minutes.";
-			errorResponseObj.DetailedResponseMessage = "";
-
-			errorResponseObj.Button1ControllerName = "Account";
-			errorResponseObj.Button1ActionName = "Logout";
-			errorResponseObj.Button1HasParameters = false;
-			errorResponseObj.Button1Parameters = "";
-			errorResponseObj.Button1Name = "Ok";
-
-			errorResponseObj.Button2ControllerName = "";
-			errorResponseObj.Button2ActionName = "";
-			errorResponseObj.Button2HasParameters = false;
-			errorResponseObj.Button2Parameters = "";
-			errorResponseObj.Button2Name = "";
-
-			return View(errorResponseObj);
-		}
-		public ActionResult GatewayTimeout()
-		{
-			ErrorResponseModel errorResponseObj = new ErrorResponseModel();
-			errorResponseObj.ResponseType = "ERROR";
-			errorResponseObj.ResponseHeader = "504 Gateway Timeout Error";
-			errorResponseObj.ResponseMessage = "The Staff portal is unable to connect to the server.<br />" +
-											   "The server could be temporarily unavailable or too busy.Try again in a few minutes.";
-			errorResponseObj.DetailedResponseMessage = "";
-
-			errorResponseObj.Button1ControllerName = "Account";
-			errorResponseObj.Button1ActionName = "Logout";
-			errorResponseObj.Button1HasParameters = false;
-			errorResponseObj.Button1Parameters = "";
-			errorResponseObj.Button1Name = "Ok";
-
-			errorResponseObj.Button2ControllerName = "";
-			errorResponseObj.Button2ActionName = "";
-			errorResponseObj.Button2HasParameters = false;
-			errorResponseObj.Button2Parameters = "";
-			errorResponseObj.Button2Name = "";
-
-			return View("ErrorResponse", errorResponseObj);
-		}
-		#endregion Server Errors
-
-	}
+    }
 }

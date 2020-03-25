@@ -211,6 +211,7 @@
     <Compile Include="Models\HumanResourceModels\LeaveReimbursementModel.cs" />
     <Compile Include="Models\InventoryModels\StoreRequisitionModel\StoreRequisitionHeaderModel.cs" />
     <Compile Include="Models\InventoryModels\StoreRequisitionModel\StoreRequisitionLineModel.cs" />
+    <Compile Include="Models\PortalDocumentsModel\PortalDocumentsModel.cs" />
     <Compile Include="Models\ProcurementModels\PurchaseRequisitionHeaderModel.cs" />
     <Compile Include="Models\ProcurementModels\PurchaseRequisitionLineModel.cs" />
     <Compile Include="Models\Responses\ErrorResponseModel.cs" />
@@ -223,7 +224,37 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="ServiceConnection.cs" />
+    <Compile Include="Web References\ApprovalManagerWebServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\EmployeeAccountWebServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\FundsClaimWebserviceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\FundsManagementWebServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\HumanResourceWebServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\InventoryManagementWebServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ProcurementManagementWebServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -704,8 +735,50 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\ResetEmployeePassword.cshtml" />
     <Content Include="Views\Account\SendPasswordResetLink.cshtml" />
+    <Content Include="Views\StoreRequisition\NewStoreRequisition.cshtml" />
+    <Content Include="Views\StoreRequisition\EditStoreRequisition.cshtml" />
+    <Content Include="Views\StoreRequisition\ViewStoreRequisition.cshtml" />
+    <Content Include="Views\StoreRequisition\_StoreRequisitionLine.cshtml" />
+    <Content Include="Views\StoreRequisition\_ViewStoreRequisitionLine.cshtml" />
+    <Content Include="Views\StoreRequisition\StoreRequisitionHistory.cshtml" />
+    <Content Include="Views\StoreRequisition\StoreRequisitionApproval.cshtml" />
+    <Content Include="Views\StoreRequisition\_StoreRequisitionDocument.cshtml" />
+    <Content Include="Views\StoreRequisition\_ViewStoreRequisitionDocument.cshtml" />
+    <Content Include="Views\StoreRequisition\GetStoreRequisitionDocument.cshtml" />
+    <Content Include="Views\InventoryHome\InventoryInfo.cshtml" />
+    <Content Include="Views\InventoryHome\_InventorySidebar.cshtml" />
+    <None Include="Web References\ApprovalManagerWebServiceReference\PortalApprovalManager.wsdl" />
+    <Content Include="Web References\ApprovalManagerWebServiceReference\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
     <None Include="Web References\EmployeeAccountWebServiceReference\EmployeeAccountWebService.wsdl" />
     <Content Include="Web References\EmployeeAccountWebServiceReference\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\FundsClaimWebserviceReference\FundsClaimManagementWebService.wsdl" />
+    <Content Include="Web References\FundsClaimWebserviceReference\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\FundsManagementWebServiceReference\FundsManagementWebService.wsdl" />
+    <Content Include="Web References\FundsManagementWebServiceReference\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\HumanResourceWebServiceReference\HumanResourceManagementWS.wsdl" />
+    <Content Include="Web References\HumanResourceWebServiceReference\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\InventoryManagementWebServiceReference\InventoryManagementWS.wsdl" />
+    <Content Include="Web References\InventoryManagementWebServiceReference\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\ProcurementManagementWebServiceReference\ProcurementManagementWS.wsdl" />
+    <Content Include="Web References\ProcurementManagementWebServiceReference\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </Content>
@@ -715,11 +788,9 @@
     <Folder Include="Content\AdminLTE\js\AdminLTE\" />
     <Folder Include="Views\FinanceHome\" />
     <Folder Include="Views\HumanResourceHome\" />
-    <Folder Include="Views\InventoryHome\" />
     <Folder Include="Views\PayrollHome\" />
     <Folder Include="Views\ProcurementHome\" />
     <Folder Include="Views\PurchaseRequisition\" />
-    <Folder Include="Views\StoreRequisition\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -747,6 +818,72 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>DynamicsNAV365_Staff_WebPortal_EmployeeAccountWebServiceReference_EmployeeAccountWebService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/FundsClaimManagementWebService">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\FundsClaimWebserviceReference\</RelPath>
+      <UpdateFromURL>http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/FundsClaimManagementWebService</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>DynamicsNAV365_Staff_WebPortal_FundsClaimWebserviceReference_FundsClaimManagementWebService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/FundsManagementWebService">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\FundsManagementWebServiceReference\</RelPath>
+      <UpdateFromURL>http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/FundsManagementWebService</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>DynamicsNAV365_Staff_WebPortal_FundsManagementWebServiceReference_FundsManagementWebService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/HumanResourceManagementWS">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\HumanResourceWebServiceReference\</RelPath>
+      <UpdateFromURL>http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/HumanResourceManagementWS</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>DynamicsNAV365_Staff_WebPortal_HumanResourceWebServiceReference_HumanResourceManagementWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/InventoryManagementWS">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\InventoryManagementWebServiceReference\</RelPath>
+      <UpdateFromURL>http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/InventoryManagementWS</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>DynamicsNAV365_Staff_WebPortal_InventoryManagementWebServiceReference_InventoryManagementWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/PortalApprovalManager">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ApprovalManagerWebServiceReference\</RelPath>
+      <UpdateFromURL>http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/PortalApprovalManager</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>DynamicsNAV365_Staff_WebPortal_ApprovalManagerWebServiceReference_PortalApprovalManager</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/ProcurementManagementWS">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ProcurementManagementWebServiceReference\</RelPath>
+      <UpdateFromURL>http://41.78.24.34:9047/CPHD/WS/CPHD/Codeunit/ProcurementManagementWS</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>DynamicsNAV365_Staff_WebPortal_ProcurementManagementWebServiceReference_ProcurementManagementWS</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <PropertyGroup>
